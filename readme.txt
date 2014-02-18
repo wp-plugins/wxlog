@@ -18,6 +18,7 @@ License: GPLv3
 5. 支持小黄鸡机器人聊天，可以在配置页面设置是否开启
 6. 支持插件，方便扩展更多功能
 7. 官方插件功能，只要开启插件就能实现相应的功能，无需另行开发
+8. 加QQ群：345619752了解最新动态
 
 == Installation ==
 
@@ -29,6 +30,9 @@ License: GPLv3
 
 1. 调试功能，方便回复测试。
 2. 官方插件列表。
+
+== Frequently asked questions ==
+1. http://www.phplog.com/wxlog
 
 
 == 配置步骤 ==
