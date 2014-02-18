@@ -1,8 +1,8 @@
-=== wxlog ===
+=== 微信日志 ===
 Name: 微信日志 For Wordpress
 Contributors: zhangji
 Link: http://www.phplog.com/wxlog
-Tags: 微信日志,wxlog,微信,weixin,wx
+Tags: 微信日志,wxlog,微信,weixin,wx,PHP日志,phplog
 Requires at least: 3.8
 Tested up to: 3.8
 License: GPLv3
@@ -32,11 +32,11 @@ License: GPLv3
 1、进入微信日志的配置页面设置 Token 设置为：你的Token
 2、登录微信公众平台进行设置 URL（如：http://www.phplog.com/?wxlog，其中的wxlog就是你的Token
 
-== Upgraded version ==
+== 版本更新 ==
 
 到官网http://www.phplog.com下载最新版微信日志 For WordPress，解压后将wxlog文件夹覆盖原文件夹即可。
 
-== Precautions ==
+== 注意事项 ==
 
 1、本插件是在Wordpress3.8基础上开发的。
 
