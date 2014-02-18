@@ -1,11 +1,10 @@
-=== 微信日志 ===
-Name: 微信日志 For Wordpress
-Contributors: zhangji
-Link: http://www.phplog.com/wxlog
-Tags: 微信日志,wxlog,微信,weixin,wx,PHP日志,phplog,%e5%be%ae%e4%bf%a1
-Requires at least: 3.8
+=== wxlog ===
+Tags: developpement, template
+Requires at least: 3.0.0
 Tested up to: 3.8
-License: GPLv3
+Stable tag: 1.5
+
+
 
 == Description ==
 
