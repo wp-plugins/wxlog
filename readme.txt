@@ -2,7 +2,7 @@
 Name: 微信日志 For Wordpress
 Contributors: zhangji
 Link: http://www.phplog.com/wxlog
-Tags: 微信日志,wxlog,微信,weixin,wx,PHP日志,phplog
+Tags: 微信日志,wxlog,微信,weixin,wx,PHP日志,phplog,%e5%be%ae%e4%bf%a1
 Requires at least: 3.8
 Tested up to: 3.8
 License: GPLv3
