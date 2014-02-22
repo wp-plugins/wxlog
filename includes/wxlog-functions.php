@@ -276,8 +276,8 @@ if(!function_exists('is_active_wxlog_plugin')){
 	}
 }
 
-if(!function_exists('get_xml')){
-	function get_xml($url,$xmlData){
+if(!function_exists('wxlog_get_xml')){
+	function wxlog_get_xml($url,$xmlData){
 		//第一种发送方式，也是推荐的方式：
 		$header[] = "Content-type: text/xml";        //定义content-type为xml,注意是数组
 		$ch = curl_init ($url);
@@ -295,21 +295,13 @@ if(!function_exists('get_xml')){
 	}
 }
 
-function & XML_unserialize($xml){
-    $xml_parser = &new XML();
+function XML_unserialize($xml){
+    $xml_parser = new XML();
     $data = $xml_parser->parse($xml);
     $xml_parser->destruct();
     return $data;
 }
 
-
-/*
-如果出现错误提示
-Fatal error: Call-time pass-by-reference has been removed in /wp-content/plugins/wxlog/includes/wxlog-functions.php on line 322
-解决方法
-查看你的php.ini配置文件，把其中的allow_call_time_pass_reference参数调整为true，并重启服务器试试。
-如果不能修改php.ini就将wxlog-functions.php文件里面的(&批量替换成(
-*/
 class XML{
     var $parser;   #a reference to the XML parser
     var $document; #the entire XML structure built up so far
@@ -318,17 +310,17 @@ class XML{
     var $last_opened_tag; #keeps track of the last tag opened.
 
     function XML(){
-        $this->parser = &xml_parser_create();
+        $this->parser = xml_parser_create();
         xml_parser_set_option($this->parser, XML_OPTION_CASE_FOLDING, false);
         xml_set_object($this->parser, $this);
         xml_set_element_handler($this->parser, 'open','close');
         xml_set_character_data_handler($this->parser, 'data');
     }
     function destruct(){ xml_parser_free($this->parser); }
-    function & parse($data){
+    function parse($data){
         $this->document = array();
         $this->stack    = array();
-        $this->parent   = $this->document;
+        $this->parent   = &$this->document;
         return xml_parse($this->parser, $data, true) ? $this->document : NULL;
     }
     function open($parser, $tag, $attributes){
@@ -341,21 +333,21 @@ class XML{
             }else{
                 #this is the second instance of $tag that we've seen. shift around
                 if(array_key_exists("$tag attr",$this->parent)){
-                    $arr = array('0 attr'=>$this->parent["$tag attr"], $this->parent[$tag]);
+                    $arr = array('0 attr'=>&$this->parent["$tag attr"], &$this->parent[$tag]);
                     unset($this->parent["$tag attr"]);
                 }else{
                     $arr = array($this->parent[$tag]);
                 }
-                $this->parent[$tag] = $arr;
+                $this->parent[$tag] = &$arr;
                 $key = 1;
             }
-            $this->parent = $this->parent[$tag];
+            $this->parent = &$this->parent[$tag];
         }else{
             $key = $tag;
         }
         if($attributes) $this->parent["$key attr"] = $attributes;
-        $this->parent  = $this->parent[$key];
-        $this->stack[] = $this->parent;
+        $this->parent  = &$this->parent[$key];
+        $this->stack[] = &$this->parent;
     }
     function data($parser, $data){
         if($this->last_opened_tag != NULL) #you don't need to store whitespace in between tags
@@ -367,10 +359,9 @@ class XML{
             $this->last_opened_tag = NULL;
         }
         array_pop($this->stack);
-        if($this->stack) $this->parent = $this->stack[count($this->stack)-1];
+        if($this->stack) $this->parent = &$this->stack[count($this->stack)-1];
     }
-	function count_numeric_items($array){
+	function count_numeric_items(&$array){
 		return is_array($array) ? count(array_filter(array_keys($array), 'is_numeric')) : 0;
 	}
 }
-
