@@ -21,10 +21,11 @@ class WXLOG_About {
 <b>官方最新消息</b>
 <div id="wxlog_news"></div>
 <b>相关网址 </b>        
-WP插件网址：http://wordpress.org/plugins/wxlog/
-WP插件SVN网址：http://plugins.svn.wordpress.org/wxlog/
-微信日志网址：http://www.phplog.com/wxlog/            
-微信公众平台：http://mp.weixin.qq.com/
+WP插件网址：<a href="http://wordpress.org/plugins/wxlog/" target="_blank">http://wordpress.org/plugins/wxlog/</a>
+WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_blank">http://plugins.svn.wordpress.org/wxlog/</a>
+微信日志网址：<a href="http://www.phplog.com/wxlog/" target="_blank">http://www.phplog.com/wxlog/</a>  
+功能提议：<a href="http://www.phplog.com/proposal/" target="_blank">http://www.phplog.com/proposal/</a>        
+微信公众平台：<a href="http://mp.weixin.qq.com/" target="_blank">http://mp.weixin.qq.com/</a>
 
 <b>回复内容优先级</b>
 1 黑名单过滤
