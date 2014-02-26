@@ -151,9 +151,9 @@ class WXLOG {
 			) $collate;";
 	    dbDelta( $sql );
 		$sql = "INSERT INTO `wp_wxlog_custom_reply` (`ID`, `keyword`, `msgtype`, `title`, `image_url`, `url`, `content`, `timestamp`, `status`) VALUES
-				(1, 'subscribe', 'text', '', '', '', '欢迎关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
-				(2, 'unsubscribe', 'text', '', '', '', '欢迎再次关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
-				(3, 'h,help,帮助', 'text', '', '', '', '功能帮助菜单（自己改吧）', '2014-01-14 11:32:45', 2);";
+				(1, 'subscribe', 'text', '', '', '', '<强>[强]欢迎关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
+				(2, 'unsubscribe', 'text', '', '', '', '<火><火>欢迎再次关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
+				(3, 'h,help,帮助', 'text', '', '', '', '<马><马>功能帮助菜单（自己改吧）', '2014-01-14 11:32:45', 2);";
 		$wpdb->query($sql);
 		
 	}	
