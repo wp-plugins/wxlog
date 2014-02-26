@@ -20,7 +20,18 @@
 	.fixed .column-msgtype {
 		display: none;
 	}
-
+	
+	.tablenav .tablenav-pages a {
+		padding: 3px 12px 6px;
+		font-size: 14px;
+		font-weight: 400;
+	}	
+	input {
+		font-size: 14px;
+		padding: 1px 3px;
+		line-height: 15px;
+		border-radius: 0;
+	}
 }
 
 

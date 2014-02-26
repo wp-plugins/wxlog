@@ -8,7 +8,7 @@ html, body {
 	text-overflow: ellipsis;
 	word-wrap: normal;
 }
-html, body, div, span, applet, object, iframe,  h1, h2, h3, h4, h5, h6, p, blockquote, pre,  a, abbr, acronym, address, big, cite, code,  del, dfn, em, img, ins, kbd, q, s, samp,  small, strike, strong, sub, sup, tt, var,  b, u, i, center,  dl, dt, dd, ol, ul, li,  fieldset, form, label, legend,  table, caption, tbody, tfoot, thead, tr, th, td,  article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary,  time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -125,7 +125,7 @@ background: #fff;
 	border-radius: 5px;
 	width: 365px;
 	background-color: #FAFAFA;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#FEFEFE), to(#FAFAFA));
+	background: -webkit-gradient(linear, left top, left bottom, from(#FEFEFE), to(#FAFAFA));
 	background-image: -moz-linear-gradient(top, #FEFEFE 0%, #FAFAFA 100%);
 	margin: 0px auto;
 }
@@ -155,7 +155,7 @@ background: #fff;
 	top: -29px;
 	height: 29px;
 	background-color: #000;
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0, 0, 0, 0.4);
 	text-shadow: none;
 	color: #FFF;
 	text-align: left;
@@ -383,7 +383,7 @@ a.btnSecondary:active {
 	border-top: 1px solid #9BA3AE;
 	border-bottom: 1px solid #333;
 	background-color: #5B6774;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#6B7888), to(#545E6A),  color-stop(0.1, #6A7786), color-stop(0.5, #5E6977), color-stop(0.9, #56616D), color-stop(1.0, #545E6A));
+	background: -webkit-gradient(linear, left top, left bottom, from(#6B7888), to(#545E6A), color-stop(0.1, #6A7786), color-stop(0.5, #5E6977), color-stop(0.9, #56616D), color-stop(1.0, #545E6A));
 	background-image: -moz-linear-gradient(top, #6A7786 10%, #5E6977 50%, #56616D 90%, #545E6A 100%);
 	border-radius: 3px 3px 0 0;
 }
@@ -497,7 +497,7 @@ a.btnSecondary:active {
 	left: 0;
 	top: 0;
 }
-.chatPanel .listContent .thumb .end,  .chatPanel .listContent .thumb {
+.chatPanel .listContent .thumb .end, .chatPanel .listContent .thumb {
 	background-color: #003D5D;
 }
 .chatPanel .listContent .scrollbar {
@@ -657,7 +657,7 @@ a.btnSecondary:active {
 	font-size: 12px;
 	color: #BEBEBE;
 }
-.chatPanel a.loadMoreConv,  .chatPanel a.loadMoreConv:hover,  .chatPanel a.loadMoreConv:active {
+.chatPanel a.loadMoreConv, .chatPanel a.loadMoreConv:hover, .chatPanel a.loadMoreConv:active {
 	color: #bfc3c6;
 	text-shadow: 0 1px 0 #fff;
 	text-decoration: none;
@@ -724,7 +724,7 @@ a.btnSecondary:active {
 	text-shadow: 0 1px 0 #fff;
 	padding: 7px 10px;
 	background-color: #7A869C;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#8794A7), to(#717D93),  color-stop(0.1, #8592A5), color-stop(0.5, #7A869C), color-stop(0.9, #737F95), color-stop(1.0, #717D93));
+	background: -webkit-gradient(linear, left top, left bottom, from(#8794A7), to(#717D93), color-stop(0.1, #8592A5), color-stop(0.5, #7A869C), color-stop(0.9, #737F95), color-stop(1.0, #717D93));
 	background-image: -moz-linear-gradient(top, #8592A5 10%, #7A869C 50%, #737F95 90%, #717D93 100%);
 }
 .chatPanel .listContent .activeColumn a.friendDetail {
@@ -754,7 +754,7 @@ a.btnSecondary:active {
 	height: 73px;
 	background: url(../images/bg_chat_listclick_blue17ced3.png) 0px 0px;
 }
-.chatPanel .activeColumn .nickName,  .chatPanel .activeColumn .desc,  .chatPanel .activeColumn .time,  .chatPanel .activeColumn .lightText { /*color:#fff; text-shadow:0 -1px 0 #3e627e; */
+.chatPanel .activeColumn .nickName, .chatPanel .activeColumn .desc, .chatPanel .activeColumn .time, .chatPanel .activeColumn .lightText { /*color:#fff; text-shadow:0 -1px 0 #3e627e; */
 }
 .chatPanel .activeColumn .edited {
 	display: none;
@@ -782,7 +782,7 @@ a.btnSecondary:active {
 	border-bottom: 1px solid #333;
 	/*background:url(../images/bg_top17ced3.png) 0px 0px repeat-x transparent;*/
 	background-color: #6B7888;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#6B7888), to(#545E6A),  color-stop(0.1, #6A7786), color-stop(0.5, #5E6977), color-stop(0.9, #56616D), color-stop(1.0, #545E6A));
+	background: -webkit-gradient(linear, left top, left bottom, from(#6B7888), to(#545E6A), color-stop(0.1, #6A7786), color-stop(0.5, #5E6977), color-stop(0.9, #56616D), color-stop(1.0, #545E6A));
 	background-image: -moz-linear-gradient(top, #6A7786 10%, #5E6977 50%, #56616D 90%, #545E6A 100%);
 	position: relative;
 	border-radius: 4px 4px 0 0;
@@ -959,7 +959,7 @@ a.btnSecondary:active {
 	color: #000;
 	text-shadow: none;
 	background-color: #ECECEC;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F4F4), to(#E5E5E5),  color-stop(0.1, #F3F3F3), color-stop(0.3, #F1F1F1), color-stop(0.5, #ECECEC), color-stop(0.7, #E9E9E9), color-stop(0.9, #E6E6E6), color-stop(1.0, #E5E5E5));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F4F4), to(#E5E5E5), color-stop(0.1, #F3F3F3), color-stop(0.3, #F1F1F1), color-stop(0.5, #ECECEC), color-stop(0.7, #E9E9E9), color-stop(0.9, #E6E6E6), color-stop(1.0, #E5E5E5));
 	background-image: -moz-linear-gradient(top, #F3F3F3 10%, #F1F1F1 30%, #ECECEC 50%, #E9E9E9 70%, #E6E6E6 90%, #E5E5E5 100%);
 }/*.cloudText*/
 .me .cloudText .cloudArrow {
@@ -984,7 +984,7 @@ a.btnSecondary:active {
 	border-radius: 7px\9;
 	border-radius: 7px;
 	background-color: #EFF0F4;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F5F9), to(#E9EAEE),  color-stop(0.1, #F3F4F8), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F5F9), to(#E9EAEE), color-stop(0.1, #F3F4F8), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
 	background-image: -moz-linear-gradient(top, #F3F4F8 10%, #EFF0F4 50%, #EAEBEF 90%, #E9EAEE 100%);
 }
 .me .cloudMesg .cloudArrow {
@@ -1062,7 +1062,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .file .fileIcon {
 	background-color: #6B5A88;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#79658E), to(#635584),  color-stop(0.1, #75628C), color-stop(0.5, #6B5A88), color-stop(0.9, #645685), color-stop(1.0, #635584));
+	background: -webkit-gradient(linear, left top, left bottom, from(#79658E), to(#635584), color-stop(0.1, #75628C), color-stop(0.5, #6B5A88), color-stop(0.9, #645685), color-stop(1.0, #635584));
 	background-image: -moz-linear-gradient(top, #75628C 10%, #6B5A88 50%, #645685 90%, #635584 100%);
 	background-color: #6B5A88\0;
 	border-style: solid;
@@ -1071,7 +1071,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfZip .fileIcon {
 	background-color: #457191;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#507C9C), to(#3C6887),  color-stop(0.1, #4E7A99), color-stop(0.5, #457191), color-stop(0.9, #3E6A89), color-stop(1.0, #3C6887));
+	background: -webkit-gradient(linear, left top, left bottom, from(#507C9C), to(#3C6887), color-stop(0.1, #4E7A99), color-stop(0.5, #457191), color-stop(0.9, #3E6A89), color-stop(1.0, #3C6887));
 	background-image: -moz-linear-gradient(top, #4E7A99 10%, #457191 50%, #3E6A89 90%, #3C6887 100%);
 	background-color: #457191\0;
 	border-style: solid;
@@ -1080,7 +1080,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfExcel .fileIcon {
 	background-color: #3E8342;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#488D3D), to(#357A47),  color-stop(0.1, #458A3F), color-stop(0.5, #3E8342), color-stop(0.9, #377C46), color-stop(1.0, #357A47));
+	background: -webkit-gradient(linear, left top, left bottom, from(#488D3D), to(#357A47), color-stop(0.1, #458A3F), color-stop(0.5, #3E8342), color-stop(0.9, #377C46), color-stop(1.0, #357A47));
 	background-image: -moz-linear-gradient(top, #458A3F 10%, #3E8342 50%, #377C46 90%, #357A47 100%);
 	background-color: #3E8342\0;
 	border-style: solid;
@@ -1089,7 +1089,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfPowerPoint .fileIcon {
 	background-color: #BC5E0A;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#BE7510), to(#B15709),  color-stop(0.1, #BE720F), color-stop(0.5, #BC5E0A), color-stop(0.9, #B45709), color-stop(1.0, #B15709));
+	background: -webkit-gradient(linear, left top, left bottom, from(#BE7510), to(#B15709), color-stop(0.1, #BE720F), color-stop(0.5, #BC5E0A), color-stop(0.9, #B45709), color-stop(1.0, #B15709));
 	background-image: -moz-linear-gradient(top, #BE720F 10%, #BC5E0A 50%, #B45709 90%, #B15709 100%);
 	background-color: #BC5E0A\0;
 	border-style: solid;
@@ -1098,7 +1098,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfMusic .fileIcon {
 	background-color: #338F9A;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#24909D), to(#1C808D),  color-stop(0.1, #2F939F), color-stop(0.5, #338F9A), color-stop(0.9, #20838F), color-stop(1.0, #1C808D));
+	background: -webkit-gradient(linear, left top, left bottom, from(#24909D), to(#1C808D), color-stop(0.1, #2F939F), color-stop(0.5, #338F9A), color-stop(0.9, #20838F), color-stop(1.0, #1C808D));
 	background-image: -moz-linear-gradient(top, #2F939F 10%, #338F9A 50%, #20838F 90%, #1C808D 100%);
 	background-color: #338F9A\0;
 	border-style: solid;
@@ -1107,7 +1107,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfWord .fileIcon {
 	background-color: #467291;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#507C9C), to(#3C6887),  color-stop(0.1, #4F7B9A), color-stop(0.5, #467291), color-stop(0.9, #3E6989), color-stop(1.0, #3C6887));
+	background: -webkit-gradient(linear, left top, left bottom, from(#507C9C), to(#3C6887), color-stop(0.1, #4F7B9A), color-stop(0.5, #467291), color-stop(0.9, #3E6989), color-stop(1.0, #3C6887));
 	background-image: -moz-linear-gradient(top, #4F7B9A 10%, #467291 50%, #3E6989 90%, #3C6887 100%);
 	background-color: #467291\0;
 	border-style: solid;
@@ -1116,7 +1116,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfPdf .fileIcon {
 	background-color: #AF4258;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#BB4F64), to(#A23A51),  color-stop(0.1, #B84B61), color-stop(0.5, #AF4258), color-stop(0.9, #A53B52), color-stop(1.0, #A23A51));
+	background: -webkit-gradient(linear, left top, left bottom, from(#BB4F64), to(#A23A51), color-stop(0.1, #B84B61), color-stop(0.5, #AF4258), color-stop(0.9, #A53B52), color-stop(1.0, #A23A51));
 	background-image: -moz-linear-gradient(top, #B84B61 10%, #AF4258 50%, #A53B52 90%, #A23A51 100%);
 	background-color: #AF4258\0;
 	border-style: solid;
@@ -1125,7 +1125,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfLink .fileIcon {
 	background-color: #2D72A8;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#4184B5), to(#3276AB),  color-stop(0.1, #3D81B2), color-stop(0.5, #2D72A8), color-stop(0.9, #2F74A9), color-stop(1.0, #3276AB));
+	background: -webkit-gradient(linear, left top, left bottom, from(#4184B5), to(#3276AB), color-stop(0.1, #3D81B2), color-stop(0.5, #2D72A8), color-stop(0.9, #2F74A9), color-stop(1.0, #3276AB));
 	background-image: -moz-linear-gradient(top, #3D81B2 10%, #2D72A8 50%, #2F74A9 90%, #3276AB 100%);
 	background-color: #2D72A8\0;
 	border-style: solid;
@@ -1134,7 +1134,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfPhoto .fileIcon {
 	background-color: #1E7D7A;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#20928B), to(#1D7D75),  color-stop(0.1, #1F8C86), color-stop(0.5, #1E7D7A), color-stop(0.9, #1D7C76), color-stop(1.0, #1D7D75E));
+	background: -webkit-gradient(linear, left top, left bottom, from(#20928B), to(#1D7D75), color-stop(0.1, #1F8C86), color-stop(0.5, #1E7D7A), color-stop(0.9, #1D7C76), color-stop(1.0, #1D7D75E));
 	background-image: -moz-linear-gradient(top, #1F8C86 10%, #1E7D7A 50%, #1D7C76 90%, #1D7D75 100%);
 	background-color: #1E7D7A\0;
 	border-style: solid;
@@ -1143,7 +1143,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfText .fileIcon {
 	background-color: #6B5A88;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#79658E), to(#635584),  color-stop(0.1, #75628C), color-stop(0.5, #6B5A88), color-stop(0.9, #645685), color-stop(1.0, #635584));
+	background: -webkit-gradient(linear, left top, left bottom, from(#79658E), to(#635584), color-stop(0.1, #75628C), color-stop(0.5, #6B5A88), color-stop(0.9, #645685), color-stop(1.0, #635584));
 	background-image: -moz-linear-gradient(top, #75628C 10%, #6B5A88 50%, #645685 90%, #635584 100%);
 	background-color: #6B5A88\0;
 	border-style: solid;
@@ -1152,7 +1152,7 @@ a.btnSecondary:active {
 }
 .chatPanel .cloud .fileOfZip .fileIcon {
 	background-color: #657F89;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#708B96), to(#58707B),  color-stop(0.1, #6D8792), color-stop(0.5, #657F89), color-stop(0.9, #5E7680), color-stop(1.0, #58707B));
+	background: -webkit-gradient(linear, left top, left bottom, from(#708B96), to(#58707B), color-stop(0.1, #6D8792), color-stop(0.5, #657F89), color-stop(0.9, #5E7680), color-stop(1.0, #58707B));
 	background-image: -moz-linear-gradient(top, #6D8792 10%, #657F89 50%, #5E7680 90%, #58707B 100%);
 	background-color: #657F89\0;
 	border-style: solid;
@@ -1173,7 +1173,7 @@ a.btnSecondary:active {
 	border-radius: 0px 3px 3px 0px;
 	padding: 15px 10px 20px 9px;
 	background-color: #EFF0F4;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F6FB), to(#E9EAEE),  color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F6FB), to(#E9EAEE), color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
 	background-image: -moz-linear-gradient(top, #F3F4F9 10%, #EFF0F4 50%, #EAEBEF 90%, #E9EAEE 100%);
 }
 .chatPanel .cloud .file .name {
@@ -1298,7 +1298,7 @@ a.btnSecondary:active {
 	border-top: 1px solid #FFF;
 	border-bottom: 1px solid #F2F2F2;
 	background-color: #EDEDED;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F4F4), to(#E5E5E5),  color-stop(0.1, #F3F3F3), color-stop(0.3, #F1F1F1), color-stop(0.5, #ECECEC), color-stop(0.7, #E9E9E9), color-stop(0.9, #E7E7E7), color-stop(1.0, #E5E5E5));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F4F4), to(#E5E5E5), color-stop(0.1, #F3F3F3), color-stop(0.3, #F1F1F1), color-stop(0.5, #ECECEC), color-stop(0.7, #E9E9E9), color-stop(0.9, #E7E7E7), color-stop(1.0, #E5E5E5));
 	background-image: -moz-linear-gradient(top, 0% #F4F4F4, #F3F3F3 10%, #F1F1F1 30%, #ECECEC 50%, #E9E9E9 70%, #E7E7E7 90%, #E5E5E5 100%);
 }
 .me .cloudVoice .cloudArrow {
@@ -1396,7 +1396,7 @@ a.btnSecondary:active {
 			color-stop(0.7,#96C742),color-stop(0.8,#92C23E),color-stop(0.9,#8FBF3B),color-stop(1.0,#8EBF3A));
 		background-image:-moz-linear-gradient(top, #C2DE8E 0%, #BFDC89 10%, #B7D978 20%, #B3D870 30%, #A8D45D 40%, #A2D254 50%, #9DCE4C 60%, #96C742 70%, #92C23E 80%, #8FBF3B 90%, #8EBF3A 100%);*/
 	background-color: #B2CF73;
-	background: -webkit-gradient(linear, left top, left bottom, from(#C4DE94), to(#A4C363),  color-stop(0.1, #B4D174), color-stop(0.2, #B2CF73),  color-stop(0.3, #B2CF73), color-stop(0.4, #B2CF73),  color-stop(0.5, #B2CF73), color-stop(0.6, #AFCC74),  color-stop(0.7, #ABCA6C), color-stop(0.8, #AECA72),  color-stop(0.9, #A9C572), color-stop(1.0, #A4C363));
+	background: -webkit-gradient(linear, left top, left bottom, from(#C4DE94), to(#A4C363), color-stop(0.1, #B4D174), color-stop(0.2, #B2CF73), color-stop(0.3, #B2CF73), color-stop(0.4, #B2CF73), color-stop(0.5, #B2CF73), color-stop(0.6, #AFCC74), color-stop(0.7, #ABCA6C), color-stop(0.8, #AECA72), color-stop(0.9, #A9C572), color-stop(1.0, #A4C363));
  background-image: -moz-linear-gradient(top, #B4D174 10%, #B2CF7320%, #B2CF73 30%, #B2CF73 40%, #B2CF73 50%, #AFCC74 60%, #ABCA6C70%, #A9C572 80%, #AECA72 90%, #A4C363 100%);
 }
 .you .cloudText .cloudContent {
@@ -1427,7 +1427,7 @@ a.btnSecondary:active {
 }
 /*纯图片、视频气泡*/
 	
-.you .cloudImg .cloudBody,  .you .cloudVideo .cloudBody {
+.you .cloudImg .cloudBody, .you .cloudVideo .cloudBody {
 	/*border-width: 8px 8px 9px;
 		-moz-border-image: url(../images/cloud/cloud_img_body_green17ced3.png) 8 8 9 8 stretch;
 		-webkit-border-image: url(../images/cloud/cloud_img_body_green17ced3.png) 8 8 9 8 stretch;
@@ -1451,7 +1451,7 @@ a.btnSecondary:active {
 	border: 1px solid #73972A\9;
 	border-radius: 6px\9;
 }
-.me .cloudImg .cloudBody,  .me .cloudVideo .cloudBody {
+.me .cloudImg .cloudBody, .me .cloudVideo .cloudBody {
 	border-width: 8px 8px 9px;
 	-moz-border-image: url(../images/cloud/cloud_img_body_white17ced3.png) 8 8 9 8 stretch;
 	-webkit-border-image: url(../images/cloud/cloud_img_body_white17ced3.png) 8 8 9 8 stretch;
@@ -1463,12 +1463,12 @@ a.btnSecondary:active {
 	border-radius: 6px\9;
 	_display: none;
 }
-.you .cloudImg .cloudBody,  .you .cloudVideo .cloudBody {
+.you .cloudImg .cloudBody, .you .cloudVideo .cloudBody {
 	border: 1px solid #73972a\9;
 	background: #98c63d\9;
 	border-radius: 6px\9;
 }
-.you .cloudImg .cloudContent,  .you .cloudVideo .cloudContent {
+.you .cloudImg .cloudContent, .you .cloudVideo .cloudContent {
 	border: 1px solid #afd660\9;
 	padding: 5px\9;
 	border-radius: 6px\9;
@@ -1490,7 +1490,7 @@ a.btnSecondary:active {
 	border: 1px solid #EAE8E8\9;
 	border-radius: 8px\9;
 }
-.me .cloudImg .cloudContent,  .you .cloudImg .cloudContent {
+.me .cloudImg .cloudContent, .you .cloudImg .cloudContent {
 	max-height: 150px;
 }
 .me .cloudImg .imageBorder, .me .cloudVideo .imageBorder {
@@ -1500,7 +1500,7 @@ a.btnSecondary:active {
 	border: 5px solid #E5E5E5\9;
 	border-radius: 0px\9;
 }
-.you .cloudImg .cloudArrow,  .you .cloudVideo .cloudArrow {
+.you .cloudImg .cloudArrow, .you .cloudVideo .cloudArrow {
 	position: absolute;
 	left: -6px;
 	top: 10px;
@@ -1545,7 +1545,7 @@ a.btnSecondary:active {
 			color-stop(0.7,#96C742),color-stop(0.8,#92C23E),color-stop(0.9,#8FBF3B),color-stop(1.0,#8EBF3A));
 		background-image:-moz-linear-gradient(top, #C2DE8E 0%, #BFDC89 10%, #B7D978 20%, #B3D870 30%, #A8D45D 40%, #A2D254 50%, #9DCE4C 60%, #96C742 70%, #92C23E 80%, #8FBF3B 90%, #8EBF3A 100%);*/
 	background-color: #B2CF73;
-	background: -webkit-gradient(linear, left top, left bottom, from(#CDEB96), to(#A4C363),  color-stop(0.1, #D1EBA2), color-stop(0.2, #C7E492),  color-stop(0.3, #BFDB8D), color-stop(0.4, #BDD687),  color-stop(0.5, #B7D17E), color-stop(0.6, #B1CE78),  color-stop(0.7, #B0CD77), color-stop(0.8, #ABC970), color-stop(0.9, #A7C568), color-stop(1.0, #A4C363));
+	background: -webkit-gradient(linear, left top, left bottom, from(#CDEB96), to(#A4C363), color-stop(0.1, #D1EBA2), color-stop(0.2, #C7E492), color-stop(0.3, #BFDB8D), color-stop(0.4, #BDD687), color-stop(0.5, #B7D17E), color-stop(0.6, #B1CE78), color-stop(0.7, #B0CD77), color-stop(0.8, #ABC970), color-stop(0.9, #A7C568), color-stop(1.0, #A4C363));
 	background-image: -moz-linear-gradient(top, #CDEB96 0%, #D1EBA2 10%, #C7E492 20%, #BFDB8D 30%, #BDD687 40%, #B7D17E 50%, #B1CE78 60%, #B0CD77 70%, #ABC970 80%, #A7C568 90%, #A4C363 100%);
 }
 .you .cloudVoice .cloudArrow {
@@ -1663,13 +1663,13 @@ a.btnSecondary:active {
 .me .chatItemContent .cloudMesgLink .cloudBody, .me .chatItemContent .cloudMesgFile .cloudBody {
 	border: none;
 	background-color: #EFF0F4;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F6FB), to(#E9EAEE),  color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F6FB), to(#E9EAEE), color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
 	background-image: -moz-linear-gradient(top, #F3F4F9 10%, #EFF0F4 50%, #EAEBEF 90%, #E9EAEE 100%);
 }
 .chatItem .cloudMesg .cloudContent {
 	padding: 4px 7px 2px 0px;
 	background-color: #EFF0F4;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#F4F6FB), to(#E9EAEE),  color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
+	background: -webkit-gradient(linear, left top, left bottom, from(#F4F6FB), to(#E9EAEE), color-stop(0.1, #F3F4F9), color-stop(0.5, #EFF0F4), color-stop(0.9, #EAEBEF), color-stop(1.0, #E9EAEE));
 	background-image: -moz-linear-gradient(top, #F3F4F9 10%, #EFF0F4 50%, #EAEBEF 90%, #E9EAEE 100%);
 }
 .you .cloudMesg .cloudContent {
@@ -1732,7 +1732,7 @@ a.btnSecondary:active {
 .chatItem .cloudMesg.cloudMesgImg .cloudMesgPanel .cloudMesgWordPanel {
 	line-height: 0;
 }
-.chatItem .cloudMesg .cloudMesgPanel .cloudMesgWordPanel,  .chatItem .cloudMesg .cloudMesgPanel .cloudMesgLinkFilePanel {
+.chatItem .cloudMesg .cloudMesgPanel .cloudMesgWordPanel, .chatItem .cloudMesg .cloudMesgPanel .cloudMesgLinkFilePanel {
 	padding: 0px;
 	margin: 0px;
 }
@@ -1741,7 +1741,7 @@ a.btnSecondary:active {
 	word-break: break-all;
 	max-width: 183px;
 }
-.chatItem .cloudMesgLink .cloudMesgLinkFilePanel .cloudMesgIcon,  .chatItem .cloudMesgFile .cloudMesgLinkFilePanel .cloudMesgIcon {
+.chatItem .cloudMesgLink .cloudMesgLinkFilePanel .cloudMesgIcon, .chatItem .cloudMesgFile .cloudMesgLinkFilePanel .cloudMesgIcon {
 	height: 62px;
 	width: 62px;
 	padding: 0px;
@@ -1755,7 +1755,7 @@ a.btnSecondary:active {
 .me .cloudMesgAppEmojiPanel .cloudMesgIcon {
 	float: right;
 }
-.chatItem .cloudMesgLink .cloudMesgLinkFilePanel .cloudMesgContent,  .chatItem .cloudMesgFile .cloudMesgLinkFilePanel .cloudMesgContent {
+.chatItem .cloudMesgLink .cloudMesgLinkFilePanel .cloudMesgContent, .chatItem .cloudMesgFile .cloudMesgLinkFilePanel .cloudMesgContent {
 	width: 90px;
 	padding: 10px 0;
 	padding: 0px\9;
@@ -1796,6 +1796,213 @@ a.btnSecondary:active {
 	zoom: 1;
 	z-index: 120;
 }
+.emojiPanel a.faceCloseIcon {
+	position: absolute;
+	z-index: 10;
+	left: 445x;
+	top:-304px;
+	width: 28px;
+	height: 27px;
+	background:url("../images/button_chat1832d7.png") no-repeat -3px -846px;
+}
+.emojiPanel a.faceCloseIcon:hover {
+	background:url("../images/button_chat1832d7.png") no-repeat -37px -846px;
+}
+.emojiPanel a.faceCloseIcon:active {
+	background:url("../images/button_chat1832d7.png") no-repeat -71px -846px;
+}
+.emojiPanel a:hover {
+	cursor: pointer;
+}
+.emojiPanel .faceTriangle {
+	position: absolute;
+	z-index: 10;
+	height:20px;
+	width:20px;
+	left: 14x;
+	margin-left:14px;
+	top:-67px;
+	display: none;
+}
+.emojiPanel .faceTrianglePanel {
+	padding:0px;
+	margin:0px;
+	position:relative;
+}
+.emojiPanel .faceTriangle .faceTriangle1 {
+	position:absolute;
+	top:1px;
+	left:0px;
+	border-style:solid;
+	border-width:8px;
+	border-color:#D3D0D0 transparent transparent;
+}
+.emojiPanel .faceTriangle .faceTriangle2 {
+	position:absolute;
+	top:0px;
+	left:0px;
+	border-style:solid;
+	border-width:8px;
+	border-color:#F6F8FB transparent transparent;
+}
+/*emoji*/
+	
+	
+.faceWrap {
+	position: absolute;
+	z-index: 0;
+	background-color: white;
+	width: 434px;
+	border: 1px solid #9FA0A0;
+	padding: 46px 20px 20px;
+	bottom: 4px;
+	margin-bottom: 88px;
+	_height: 172px;
+	overflow-y: hidden;
+	left: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-box-shadow: 0px 0px 6px rgba(94, 89, 89, 0.57);
+	-o-box-shadow: 0px 0px 6px rgba(94, 89, 89, 0.57);
+	-webkit-box-shadow: 0px 0px 6px rgba(94, 89, 89, 0.57);
+	-ms-box-shadow: 0px 0px 6px rgba(94, 89, 89, 0.57);
+	box-shadow: 0px 0px 6px rgba(94, 89, 89, 0.57);
+}
+.faceWrap .emojiBox {
+	height:195px;
+}
+.faceWrap .emojiBox .emojiContent {
+	height: 203px;
+	overflow-y: auto;
+	margin:7px -20px 12px -12px;
+	margin-left:0;
+	position:relative;
+	top:-7px;
+}
+.emojiBox .emojiContent .emojiFacePanel {
+	/*width: 450px;*/
+		height:368px;
+	background:url("../images/preview/emojiPanel17ced3.png") no-repeat;
+}
+.faceWrap .emojiBox a {
+	display:block;
+	float:left;
+	width:28px;
+	height:28px;
+	border-right:1px solid #DFE6F6;
+	border-bottom:1px solid #DFE6F6
+}
+ul.faceTab {
+	position: relative;
+	bottom: 331px;
+	z-index: 10;
+	width: 457px;
+	height:6px;
+	list-style-type: none;
+	margin: 0px;
+	margin-left: 6px;
+	padding-left: 5px;
+	padding-left: 17px;
+	padding-bottom: 23px;
+	border-bottom: 1px solid #D5D5D5;
+	border-left : 1px solid #CAC8C8\9;
+	font: bold 12px verdana, arial;
+	background-color: #F6F6F6;
+	-moz-border-radius:3px 3px 0px 0px;
+	-webkit-border-radius:3px 3px 0px 0px;
+	border-radius:3px 3px 0px 0px;
+	margin-left: 5px\9;
+}
+ul.faceTab li {
+	float:left;
+	height:29px;
+	background-color:#F6F8FB;
+	margin:0px;
+}
+ul.faceTab a:link, ul.faceTab a:visited {
+	display:block;						/* 块元素 */
+	color:#6B6B6B;
+	line-height:21px;
+	font-family:Helvetica, Arial, '宋体', sans-serif;
+	font-size:12px;
+	font-weight: normal;
+	text-decoration:none;
+	padding:5px 10px 3px 10px;
+	border-left:1px solid transparent;
+	border-right:1px solid transparent;
+}
+ul.faceTab a.chooseFaceTab {
+	/*background:url("../images/button_chat1832d7.png") no-repeat -109px -1046px;*/
+		background-color:#FFF;
+	border-left:1px solid #D5D5D5;
+	border-right:1px solid #D5D5D5;
+	border-bottom: 1px solid #FFF;
+	border-top: none;
+}
+/*face expression*/
+	.faceWrap .faceBox .borderRight {
+	border-right:none;
+}
+.faceWrap .faceBox .borderBottom {
+	border-bottom:none;
+}
+.faceWrap .faceWrapFooter .changePointPannel {
+	width:36px;
+	height:12px;
+	margin:20px auto 0px;
+}
+.faceWrap .point1 a, .faceWrap .point2 a, .faceWrap .point3 a {
+	cursor: pointer;
+	display: block;
+	float:left;
+	height:10px;
+	width:10px;
+	background:url("../images/button_chat1832d7.png") no-repeat -13px -1108px;
+}
+.faceWrap .point1 a:hover, .faceWrap .point2 a:hover, .faceWrap .point3 a:hover {
+	background-position:-1px -1108px;
+}
+/*post local face*/
+	.faceWrap .postLocalFace {
+	float:right;
+	margin:4px 0px -7px;
+	height:24px;
+}
+.faceWrap .postLocalFace .postLocalFaceMiddle {
+	height:20px;
+	width:120px;
+	background-color:#E9EDF2;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+	border-top:1px solid #DAE0E5;
+	border-bottom:1px solid #fff;
+}
+.faceWrap .postLocalFace .postLocalFaceMiddle a {
+	height:20px;
+	line-height:20px;
+	text-shadow:none;
+	overflow: hidden;
+}
+.faceWrap .postLocalFace a {
+	color:#8F969E;
+	width:120px;
+	float:left;
+}
+.faceWrap .postLocalFace a:hover {
+	background:none;
+	text-decoration: underline;
+}
+.faceWrap .postLocalFace .postLocalFaceMiddle .faceHook {
+	height:0px;
+	width:0px;
+	border-style:solid;
+	border-width:5px;
+	border-color:#E9EDF2 #E9EDF2 #8B9096;
+	float:left;
+	margin:3px 9px 0px;
+}
 .bottle_mail .fast_rly .faceWrap {
 	bottom: 94px;
 	left: 15px;
@@ -1818,7 +2025,7 @@ a.btnSecondary:active {
 	clear: both;
 	width: 435px;
 	overflow: hidden;
-	background: url("../images/qqSmilies17ced3.png") no-repeat;
+	background: url("../images/preview/qqSmilies17ced3.png") no-repeat;
 	cursor: pointer;
 }
 .faceBox a {
@@ -1888,7 +2095,7 @@ a.btnSecondary:active {
 }
 /*功能图标*/
 .chatPanel .inputArea {
-	padding: 14px 10px 0 5px;
+	padding: 8px 10px 0 5px;
 	height: 43px;
 }
 .chatPanel .inputArea .attach {
@@ -1903,7 +2110,7 @@ a.btnSecondary:active {
 	background: url(../images/preview/button_chat1832d7.png) no-repeat 0 0;
 	text-decoration: none;
 }
-.chatPanel .inputArea .attach a.expression:link,  .chatPanel .inputArea .attach a.expression:visited {
+.chatPanel .inputArea .attach a.expression:link, .chatPanel .inputArea .attach a.expression:visited {
 	background-position: 3px -1px;
 }
 .chatPanel .inputArea .attach a.expression:hover {
@@ -1913,7 +2120,7 @@ a.btnSecondary:active {
 .chatPanel .inputArea .attach a.expression:active {
 	background-position: -61px -1px;
 }
-.chatPanel .inputArea .attach a.sendVoice:link,  .chatPanel .inputArea .attach a.sendVoice:visited {
+.chatPanel .inputArea .attach a.sendVoice:link, .chatPanel .inputArea .attach a.sendVoice:visited {
 	background-position: -1px -66px;
 }
 .chatPanel .inputArea .attach a.sendVoice:hover {
@@ -1922,7 +2129,7 @@ a.btnSecondary:active {
 .chatPanel .inputArea .attach a.sendVoice:active {
 	background-position: -65px -66px;
 }
-.chatPanel .inputArea .attach a.photoActive:link,  .chatPanel .inputArea .attach a.photoActive:visited {
+.chatPanel .inputArea .attach a.photoActive:link, .chatPanel .inputArea .attach a.photoActive:visited {
 	background-position: -4px -34px;
 }
 .chatPanel .inputArea .attach a.photoActive:hover {
@@ -1932,7 +2139,7 @@ a.btnSecondary:active {
 .chatPanel .inputArea .attach a.photoActive:active {
 	background-position: -64px -34px;
 }
-.chatPanel .inputArea .attach a.screensnap:link,  .chatPanel .inputArea .attach a.screensnap:visited {
+.chatPanel .inputArea .attach a.screensnap:link, .chatPanel .inputArea .attach a.screensnap:visited {
 	background-position: -1px -98px;
 }
 .chatPanel .inputArea .attach a.screensnap:hover {
@@ -1941,7 +2148,7 @@ a.btnSecondary:active {
 .chatPanel .inputArea .attach a.screensnap:active {
 	background-position: -62px -98px;
 }
-.chatPanel .inputArea .attach a.file:link,  .chatPanel .inputArea .attach a.file:visited {
+.chatPanel .inputArea .attach a.file:link, .chatPanel .inputArea .attach a.file:visited {
 	background-position: 0px -34px;
 }
 .chatPanel .inputArea .attach a.file:hover {
@@ -1952,8 +2159,8 @@ a.btnSecondary:active {
 }
 .chatPanel .chatInput {
 	float: left;
-	width: 190px;
-	width: 190px\9;
+	width: 310px;
+	width: 310px\9;
 	height: 20px;
 	margin: 0 10px 0 10px;
 	padding: 7px 10px 2px;
@@ -2002,7 +2209,7 @@ a.chatSend {
 	box-shadow: 0 1px 3px #D9D9D9;
 	text-shadow: 0 1px 1px #444;
 	background: #486CB4;
-	background: -webkit-gradient(linear,  left top, left bottom,  from(#6078AA), to(#465C8C),  color-stop(0.1, #5E76A7), color-stop(0.5, #546B9C), color-stop(0.9, #495F8F), color-stop(1.0, #465C8C));
+	background: -webkit-gradient(linear, left top, left bottom, from(#6078AA), to(#465C8C), color-stop(0.1, #5E76A7), color-stop(0.5, #546B9C), color-stop(0.9, #495F8F), color-stop(1.0, #465C8C));
 	background-image: -moz-linear-gradient(top, #5E76A7 10%, #546B9C 50%, #495F8F 90%, #465C8C 100%);
 }
 a.chatSend:active {
@@ -2029,60 +2236,54 @@ a.chatSend b {
 .chatPanel .chatOperator a.chatSend:active b {
 	border-top: 1px solid #5F78AB;
 }
-
-
-	.chatPanel .mediaFullText .mediaImg{
-		height:164px;
-		width:100%;
-		padding:0px 0px 5px;
-		margin:0px;
-		margin-top:17px;
-		overflow:hidden;
-		position:relative;
-	}
-	.chatPanel .mediaFullText .mediaImg img{
-		margin-top:17px;
-		position:absolute;
-	}
-	.chatPanel .mediaFullText .mediaContent{
-		padding:6px 8px 10px;
-		font-size:12px;
-		line-height: 1.5em;
-		text-align:left;
-		color:#666B6E;
-	}
-	.chatPanel .mediaFullText .mediaContentP{
-		padding:12px 8px 10px;
-	}
-	
-	.chatPanel .media .mediaFooter{
-		background-color:#F0F4F8;
-		-webkit-border-radius:0px 0px 5px 5px;
-		-moz-border-radius:0px 0px 5px 5px;
-		border-radius:0px 0px 5px 5px;
-	}
-	.chatPanel .media .mediaFooter a{
-		color:#792F2E;
-		font-size:14px;
-		padding:0px 7px;
-	}
-	.chatPanel .media .mediaFooter .mesgIcon{
-		margin:12px 3px 0px 0px;
-	}
-	
+.chatPanel .mediaFullText .mediaImg {
+	height:164px;
+	width:100%;
+	padding:0px 0px 5px;
+	margin:0px;
+	margin-top:17px;
+	overflow:hidden;
+	position:relative;
+}
+.chatPanel .mediaFullText .mediaImg img {
+	margin-top:17px;
+	position:absolute;
+}
+.chatPanel .mediaFullText .mediaContent {
+	padding:6px 8px 10px;
+	font-size:12px;
+	line-height: 1.5em;
+	text-align:left;
+	color:#666B6E;
+}
+.chatPanel .mediaFullText .mediaContentP {
+	padding:12px 8px 10px;
+}
+.chatPanel .media .mediaFooter {
+	background-color:#F0F4F8;
+	-webkit-border-radius:0px 0px 5px 5px;
+	-moz-border-radius:0px 0px 5px 5px;
+	border-radius:0px 0px 5px 5px;
+}
+.chatPanel .media .mediaFooter a {
+	color:#792F2E;
+	font-size:14px;
+	padding:0px 7px;
+}
+.chatPanel .media .mediaFooter .mesgIcon {
+	margin:12px 3px 0px 0px;
+}
 .chatPanel .media .mediaHead .title {
-line-height: 1.2em;
-margin-top: 22px;
-display: block;
-max-width: 312px;
-text-align: left;
-}	
-
-
-	.chatPanel .media .mediaHead .time{
-		margin:0px;
-		margin-top: 21px;
-		color:#82888C;
-		background:none;
-		width:auto;
-	}
+	line-height: 1.2em;
+	margin-top: 22px;
+	display: block;
+	max-width: 312px;
+	text-align: left;
+}
+.chatPanel .media .mediaHead .time {
+	margin:0px;
+	margin-top: 21px;
+	color:#82888C;
+	background:none;
+	width:auto;
+}
