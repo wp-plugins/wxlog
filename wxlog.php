@@ -153,8 +153,7 @@ class WXLOG {
 		$sql = "INSERT INTO `wp_wxlog_custom_reply` (`ID`, `keyword`, `msgtype`, `title`, `image_url`, `url`, `content`, `timestamp`, `status`) VALUES
 				(1, 'subscribe', 'text', '', '', '', '欢迎关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
 				(2, 'unsubscribe', 'text', '', '', '', '欢迎再次关注微信日志http://www.phplog.com/wxlog', '2014-01-14 10:31:50', 2),
-				(3, 'h,help,帮助', 'text', '', '', '', '功能帮助菜单（自己改吧）', '2014-01-14 11:32:45', 2),
-				(4, 'voice', 'text', '', '', '', '系统暂时还不支持语音回复，直接发送文本来搜索吧。\r\n获取更多帮助信息请输入：h。', '2014-01-14 11:32:45', 0);";
+				(3, 'h,help,帮助', 'text', '', '', '', '功能帮助菜单（自己改吧）', '2014-01-14 11:32:45', 2);";
 		$wpdb->query($sql);
 		
 	}	
