@@ -27,6 +27,7 @@ class WXLOG_Admin {
 	public function admin_enqueue_scripts_style() {
 		global $WXLOG;
 		wp_enqueue_style( 'wxlog_admin_css', $WXLOG->plugin_url() . '/includes/admin/css/admin.css' );
+		wp_enqueue_style( 'wxlog_emoji_css', $WXLOG->plugin_url() . '/includes/admin/css/emoji.css' );
 		if(get_bloginfo('version')>=3.8){
 			wp_enqueue_style( 'wxlog_menu_css', $WXLOG->plugin_url() . '/includes/admin/css/menu.css' );
 		}
@@ -63,12 +64,12 @@ class WXLOG_Admin {
 			$WXLOG_Log->prepare_items();
 			?>
 <div class="wrap">
-  <h2>最新消息 <a href="<?php echo wp_nonce_url( add_query_arg( 'export_wxlog_log', 'true' ), 'export_wxlog_log'); ?>" class="add-new-h2">导出消息</a> <a href="<?php echo wp_nonce_url( add_query_arg( 'delete_wxlog_log', 'true' ), 'delete_wxlog_log' ); ?>" class="add-new-h2">清空消息</a></h2>
+  <h2>最新消息 <a href="<?php echo wp_nonce_url( add_query_arg( 'export_wxlog_log', 'true' ), 'export_wxlog_log'); ?>" class="add-new-h2">导出消息</a> <a style="display:none;" href="<?php echo wp_nonce_url( add_query_arg( 'delete_wxlog_log', 'true' ), 'delete_wxlog_log' ); ?>" class="add-new-h2">清空消息</a></h2>
 
 <ul class='subsubsub'>
-	<li class='all'><a href='edit.php?post_type=post' class="current">全部<span class="count">（<?php echo  $WXLOG_Log->all; ?>）</span></a> |</li>
-	<li class='publish'><a href='edit.php?post_status=publish&amp;post_type=post'>关注<span class="count">（<?php echo  $WXLOG_Log->subscribe; ?>）</span></a> |</li>
-	<li class='trash'><a href='edit.php?post_status=trash&amp;post_type=post'>取消关注<span class="count">（<?php echo  $WXLOG_Log->unsubscribe; ?>）</span></a></li>
+	<li class='all'><a href='admin.php?page=wxlog_log' class="current">全部<span class="count">（<?php echo  $WXLOG_Log->all; ?>）</span></a> |</li>
+	<li class='publish'><a href='admin.php?page=wxlog_log&s=subscribe'>关注<span class="count">（<?php echo  $WXLOG_Log->subscribe; ?>）</span></a> |</li>
+	<li class='trash'><a href='admin.php?page=wxlog_log&s=unsubscribe'>取消关注<span class="count">（<?php echo  $WXLOG_Log->unsubscribe; ?>）</span></a></li>
 </ul>
 
   <form id="wxlog_log" action="" method="get">

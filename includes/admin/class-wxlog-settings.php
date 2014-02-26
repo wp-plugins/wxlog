@@ -24,11 +24,34 @@ class WXLOG_Settings {
 							'desc'		=> sprintf( '微信公众平台 <code>%s</code>', 'http://mp.weixin.qq.com/' )
 						),
 						array(
+							'name' 		=> 'wxlog_blacklist_user',
+							'std' 		=> '',//初始值
+							'label' 	=> '黑名单',
+							'placeholder' => '请输入黑名单',//背景提示
+							'desc'		=> '这里填写FromUserName字段，多个用户请用英文,号隔开',
+							'type' 			=> 'textarea'
+						),
+						array(
+							'name' 		=> 'wxlog_blacklist_message_custom',
+							'std' 		=> '您已经被管理员列入黑名单',
+							'label' 	=> '黑名单自动回内容',
+							'desc'		=> '如果为空将不回复内容，也不会继续获取其他的内容'
+						),
+						array(
+							'name' 		=> 'wxlog_default_content',
+							'std' 		=> '欢迎关注我的微信日志。\r\nhttp://www.phplog.com/wxlog',
+							'label' 	=> '默认回复内容'
+						),						
+					),
+				),
+				'post_reply' => array('文章回复',
+					array(
+						array(
 							'name' 		=> 'wxlog_default_image',
 							'std' 		=> '',//初始值
 							'placeholder'	=> '请输入默认缩略图',//背景提示
 							'label' 	=> '默认缩略图',
-							'desc'		=> '当博客日志没有设置缩略图，将显示本图片'
+							'desc'		=> '当文章没有设置缩略图，将显示本图片'
 						),												
 						array(
 							'name' 		=> 'wxlog_post_max',
@@ -50,45 +73,39 @@ class WXLOG_Settings {
 								'10'      => '10条',
 								'0'      => '关闭搜索博客'
 							)
+						),	
+						array(
+							'name' 		=> 'wxlog_post_new',
+							'std' 		=> 'new',//初始值
+							'label' 	=> '回复最新的文章',
 						),
 						array(
-							'name' 		=> 'wxlog_blacklist_user',
+							'name' 		=> 'wxlog_post_hot',
+							'std' 		=> 'hot',//初始值
+							'label' 	=> '回复最火的文章',
+							'desc'		=> sprintf( '要求博客要有统计浏览次数的功能' )
+						),	
+						array(
+							'name' 		=> 'wxlog_post_hot_field_name',
+							'std' 		=> 'views',//初始值
+							'label' 	=> '浏览次数的字段名',
+							'desc'		=> sprintf( '如果不填将不能回复最火的文章' )
+						),	
+						array(
+							'name' 		=> 'wxlog_post_hot_comment',
+							'std' 		=> 'comment',//初始值
+							'label' 	=> '回复评论最多的文章',
+						),	
+						array(
+							'name' 		=> 'wxlog_post_category',
 							'std' 		=> '',//初始值
-							'label' 	=> '黑名单',
-							'placeholder' => '请输入黑名单',//背景提示
-							'desc'		=> '这里填写FromUserName字段，多个用户请用英文,号隔开',
-							'type' 			=> 'textarea'
-						),
-						array(
-							'name' 		=> 'wxlog_blacklist_message',
-							'std' 		=> '您已经被管理员列入黑名单',//初始值
-							'placeholder'	=> '',
-							'label' 	=> '黑名单自动回内容',
-							'desc'		=> '',
-							'type'      => 'select',
-							'options'   => array(
-								'您已经被管理员列入黑名单'       => '您已经被管理员列入黑名单',
-								'您的消息已经被屏蔽'       => '您的消息已经被屏蔽',
-								'custom'      => '自定义回复内容'								
-							)
-						),
-						array(
-							'name' 		=> 'wxlog_blacklist_message_custom',
-							'std' 		=> '',
-							'label' 	=> '自定义回复内容'
-						),
-					),
-				),
+							'label' 	=> '按分类回复文章',
+							'desc'		=> '这里填写文章的分类ID，多个ID用英文,号隔开',
+						),							
+					)
+				),		
 				'advanced' => array('高级',
 					array(
-						array(
-							'name' 		=> 'wxlog_simsimi',
-							'cb_label'  => '开启',
-							'std' 		=> '1',
-							'label' 	=> '是否开启小黄鸡',
-							'desc'		=> '开启小黄鸡聊天',
-							'type' 		=> 'checkbox'
-						),
 						array(
 							'name' 		=> 'wxlog_txt_log',
 							'cb_label'  => '开启',
@@ -194,13 +211,6 @@ class WXLOG_Settings {
 				jQuery(this).addClass('nav-tab-active');
 				return false;
 			});
-			jQuery('#setting-wxlog_blacklist_message').change(function(){
-				if ( jQuery(this).val() == 'custom' ) {
-					jQuery('#setting-wxlog_blacklist_message_custom').closest('tr').show();
-				} else {
-					jQuery('#setting-wxlog_blacklist_message_custom').closest('tr').hide();
-				}
-			}).change();
 			jQuery('.nav-tab-wrapper a:first').click();");
 	}
 

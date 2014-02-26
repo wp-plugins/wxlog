@@ -100,7 +100,7 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 	public function display_tablenav( $which ) {?>
 		<?php if ( 'top' == $which ) : ?>
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
-        <div class="alignleft actions">只要开启插件就能实现相应的功能，无需另行开发。<span id="plusins_gg"></span></div>
+        <div class="alignleft actions">只要开启插件就能实现相应的功能，无需另行开发。</div>
 			<?php $this->pagination( $which );?>
 			<br class="clear" />
 		</div>

@@ -97,31 +97,27 @@ class WXLOG_Custom_menu {
 		return json_encode(array('button'=>$arr));	
 	}
 
-
-	 function get_json($url, $data){
-		 $ch = curl_init();
-		 $header = "Accept-Charset: utf-8";
-		 curl_setopt($ch, CURLOPT_URL, $url);
-		 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-		 curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-		 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
-		 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		 curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
-		 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		 $tmpInfo = curl_exec($ch);
-		 if (curl_errno($ch)) {
-			return false;
-		 }else{
-			// var_dump($tmpInfo);
-			return true;
-		 }
-	 }
-
-
-
+	function get_json($url, $data){
+	   $ch = curl_init();
+	   $header = "Accept-Charset: utf-8";
+	   curl_setopt($ch, CURLOPT_URL, $url);
+	   curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+	   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+	   curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+	   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
+	   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	   curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
+	   curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	   $tmpInfo = curl_exec($ch);
+	   if (curl_errno($ch)) {
+		  return false;
+	   }else{
+		  // var_dump($tmpInfo);
+		  return true;
+	   }
+	}
 
 	//初始化设置
 	private function init_settings() {
@@ -457,7 +453,7 @@ function del_menu(id){
 
 wp_enqueue_script( 'dashboard' );
 wp_enqueue_script('admin-widgets');
-		}else{ ?>
+		}else{echo '<div class="error fade below-h2"><p>获取自定义权限失败。</p></div>';?>
 			
 <script>
 jQuery(document).ready(function(){

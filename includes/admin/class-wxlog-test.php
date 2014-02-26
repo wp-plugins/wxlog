@@ -19,21 +19,10 @@ class WXLOG_Test {
 		add_submenu_page( 'wxlog_log', '调试', '调试', 'administrator', 'wxlog_test', array( $this, 'wxlog_test_page' ) );
 	}
 
-	public function make_signature() {
-        $timestamp = intval(time()); 
-        $nonce = intval($timestamp+3600*24*7); 
-        $token = TOKEN; 
-        $tmpArr = array($token, $timestamp, $nonce);//print_r($tmpArr);
-        sort($tmpArr,SORT_STRING);//print_r($tmpArr);
-        $tmpStr = implode( $tmpArr );
-        $tmpStr = sha1( $tmpStr );
-  		return array($tmpStr,$timestamp,$nonce);
-	}
-
 	//调试页面内容
 	public function wxlog_test_page() {
 		global $wpdb;
-		$signature_timestamp_nonce = $this->make_signature();
+		$signature_timestamp_nonce = wxlog_make_signature();
 		$wxlog_log = $wpdb->get_row("SELECT * FROM {$wpdb->wxlog_log} WHERE 1=1 order by ID asc");
 		$message = wxlog_xml_to_array($wxlog_log->message);//print_r($message); 
 		?>
@@ -121,7 +110,7 @@ class WXLOG_Test {
     </div>
     <p class="submit">
 		<input class="button-primary" id="submit" type="submit" value="预览">      
-		<input style="display:none;" class="button" type="submit" value="调用" onclick="document.form1.action = '<?=site_url()?>/?<?=TOKEN?>&signature=<?=$signature_timestamp_nonce[0]?>&timestamp=<?=$signature_timestamp_nonce[1]?>&nonce=<?=$signature_timestamp_nonce[2]?>;">
+		<input style="display:noness;" class="button" type="submit" value="调用" onclick="document.form1.action = '<?=site_url()?>/?<?=TOKEN?>&signature=<?=$signature_timestamp_nonce[0]?>&timestamp=<?=$signature_timestamp_nonce[1]?>&nonce=<?=$signature_timestamp_nonce[2]?>';">
     </p>
   </form>
 
@@ -238,7 +227,7 @@ function get_msgtype(msgtype){
 	global $WXLOG;
 	$WXLOG->add_inline_js("
 		jQuery('#submit').click(function() {
-			tb_show('预览', '".admin_url( "admin.php?page=wxlog_test&preview=1&signature=".$signature_timestamp_nonce[0]."&timestamp=".$signature_timestamp_nonce[1]."&nonce=".$signature_timestamp_nonce[2]."&HTTP_RAW_POST_DATA='+jQuery(\"#HTTP_RAW_POST_DATA\").val()+'&amp;TB_iframe=true&amp;height=480&amp;width=420" )."');
+			tb_show('预览', '".admin_url( "admin.php?page=wxlog_test&preview=1&signature=".$signature_timestamp_nonce[0]."&timestamp=".$signature_timestamp_nonce[1]."&nonce=".$signature_timestamp_nonce[2]."&HTTP_RAW_POST_DATA='+jQuery(\"#HTTP_RAW_POST_DATA\").val()+'&amp;TB_iframe=true&amp;height=480&amp;width=520" )."');
 			return false;	
 		});				
 	");}

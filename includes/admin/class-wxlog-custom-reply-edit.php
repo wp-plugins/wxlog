@@ -77,7 +77,7 @@ class WXLOG_Custom_reply_edit {
             </tr>
 
             <tr valign="top"><th scope="row">回复内容</th><td>
-            <textarea name="content" id="content" cols="50" rows="3" style="height:280px;" class="regluar-text ltr"><?=$custom_reply->content?></textarea>
+            <textarea name="content" id="content" cols="50" rows="3" style="height:280px;" class="regluar-text ltr"><?=stripslashes($custom_reply->content)?></textarea>
             <p class="description">仅对文本消息有效，其它的回复类型只作为描述</p></td></tr>
 
             <tr valign="top"><th scope="row">是否有效</th><td>

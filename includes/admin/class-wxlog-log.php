@@ -25,6 +25,7 @@ class WXLOG_Log extends WP_List_Table {
 		$this->filter_status = isset( $_REQUEST['filter_status'] ) ? sanitize_text_field( $_REQUEST['filter_status'] ) : '';
 		$this->logs_per_page = ! empty( $_REQUEST['logs_per_page'] ) ? intval( $_REQUEST['logs_per_page'] ) : 25;
 		$this->filter_month  = ! empty( $_REQUEST['filter_month'] ) ? sanitize_text_field( $_REQUEST['filter_month'] ) : '';
+		$this->keyword = $_REQUEST['s'];
 
 		if ( $this->logs_per_page < 1 )
 			$this->logs_per_page = 9999999999999;
@@ -35,6 +36,7 @@ class WXLOG_Log extends WP_List_Table {
 		$this->unsubscribe = $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->wxlog_log} WHERE content='unsubscribe';" );
 	}
 
+
 	function column_cb( $item ) {?>
         <label class="screen-reader-text" for="cb-select-<?php echo $item->ID; ?>"><?php printf( __( 'Select %s' ), '消息' ); ?></label>
         <input id="cb-select-<?php echo  $item->ID; ?>" type="checkbox" name="massage[]" value="<?php  echo  $item->ID; ?>" />
@@ -42,8 +44,7 @@ class WXLOG_Log extends WP_List_Table {
 		<?php
 	}
 	
-
-
+	
 	/**
 	 * column_default function.
 	 *
@@ -76,7 +77,7 @@ class WXLOG_Log extends WP_List_Table {
 				if($item->msgtype=='image'){
 					return '<img src="'.$item->content.'" style="max-height:20px;">';
 				}
-				return $item->content;
+				return wxlog_emoji(wxlog_qqface($item->content,'img'),'html');
 				
 			break;
 			case 'msgtype' :
@@ -106,10 +107,11 @@ class WXLOG_Log extends WP_List_Table {
 				return $item->user_agent;
 			break;
 			case 'reply' :
-				return '<a href="'.admin_url( 'admin.php?page=wxlog_log&preview='.$item->ID ).'&amp;TB_iframe=true&amp;height=480&amp;width=420" class="thickbox">预览</a>';
+				return '<a href="'.admin_url( 'admin.php?page=wxlog_log&preview='.$item->ID ).'&amp;TB_iframe=true&amp;height=480&amp;width=470" class="thickbox">预览</a>';
 			break;
 		}
 	}
+
 
 	//列表字段
 	public function get_columns(){
@@ -136,12 +138,11 @@ class WXLOG_Log extends WP_List_Table {
 		);
 	}	
 
+
 	//筛选
 	public function display_tablenav( $which ) {
-		?>
-			<?php if ( 'top' == $which ) : ?>
+		if ( 'top' == $which ) : ?>
 		<div class="tablenav <?php echo esc_attr( $which ); ?>">
-            
 				<div class="alignleft actions">
 					<input type="hidden" name="page" value="wxlog_log" />
 					<select name="filter_status">
@@ -193,17 +194,14 @@ class WXLOG_Log extends WP_List_Table {
 			?>
 			<br class="clear" />
 		</div>
- 			<?php else: ?>
+		<?php else: ?>
 
-			<div class="tablenav bottom">
-				<?php $this->extra_tablenav( $which ); ?>
-				<?php $this->pagination( $which ); ?>
-				<br class="clear" />
-			</div>
-			<?php endif; ?>
-
-                    
-<?php
+        <div class="tablenav bottom">
+            <?php $this->extra_tablenav( $which ); ?>
+            <?php $this->pagination( $which ); ?>
+            <br class="clear" />
+        </div>
+        <?php endif;
 	}
 
 
@@ -219,12 +217,6 @@ class WXLOG_Log extends WP_List_Table {
 	}
 
 
-	/**
-	 * prepare_items function.
-	 *
-	 * @access public
-	 * @return void
-	 */
 	function prepare_items() {
 		global $wpdb;
 
@@ -241,6 +233,12 @@ class WXLOG_Log extends WP_List_Table {
 
 		if ( $this->filter_status !== '' )
 			$query_where .= " AND status = '{$filter_status}' ";
+			
+		if ( $this->keyword == 'subscribe' )
+			$query_where .= " AND content = 'subscribe' ";
+
+		if ( $this->keyword == 'unsubscribe' )
+			$query_where .= " AND content = 'unsubscribe' ";
 
 		if ( $this->filter_month )
 			$query_where .= " AND timestamp >= '" . date( 'Y-m-01', strtotime( $this->filter_month ) ) . "' ";
@@ -269,6 +267,7 @@ class WXLOG_Log extends WP_List_Table {
 			'per_page'    => $per_page,
 			'total_pages' => ceil( $total_items / $per_page )
 		) );
-
 	}
+	
+	
 }
