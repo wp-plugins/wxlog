@@ -3,7 +3,7 @@
 Plugin Name: 微信日志 For Wordpress
 Plugin URI: http://www.phplog.com/wxlog
 Description: 微信日志是基于Wordpress的完全开源的微信插件，利用微信日志能很方便扩展微信公众号的功能。微信日志完美支持Wordpress的插件方式来扩展更多的功能。
-Version: 1.0.5
+Version: 1.0.6
 Author: zhangji
 Author URI: http://www.phplog.com/
 Requires at least: 3.8
