@@ -16,7 +16,6 @@ Tested up to: 3.8
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define( 'WXLOG_VERSION', '1.0.4' );
 define( "TOKEN", get_option( 'wxlog_token' ) ); 
 
 class WXLOG {
