@@ -52,6 +52,10 @@ class WXLOG_Custom_reply extends WP_List_Table {
 				return $item->msgtype;
 			break;
 			case 'content' :
+				if($item->msgtype=='news'){
+					$wxlog_news_list_title = explode('|phplogcom|',stripslashes($item->title));
+					return $wxlog_news_list_title[0];
+				}
 				return $item->content;
 			break;		
 			case 'timestamp' :
@@ -60,7 +64,6 @@ class WXLOG_Custom_reply extends WP_List_Table {
 			case 'operating' :
 				return '<a href="?page=wxlog_custom_reply&edit='.$item->ID.'">编辑</a> <a onClick="return confirm(\'您确定要删除么\')" href="?page=wxlog_custom_reply&del='.$item->ID.'">删除</a>';
 			break;
-
 
 		}
 	}

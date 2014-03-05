@@ -10,9 +10,9 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 			'ajax'      => false
 		) );
 		
-		if($_GET['action']=='wxlog_plugin_open' and $_GET['wxlog_plugins']){
+		if($_GET['action']=='wxlog_plugin_open'){
 			//echo '<pre>';print_r($_GET['wxlog_plugins']);
-			update_option('wllog_my_plugins', implode(',',$_GET['wxlog_plugins']));
+			update_option('wxlog_my_plugins', implode(',',$_GET['wxlog_plugins']));
 			flush_rewrite_rules();
 			echo '<div class="updated fade"><p>操作成功。</p></div>';
 		}
@@ -28,7 +28,7 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 	 * @return void
 	 */
 	function column_default( $item, $column_name ) {
-		$wllog_my_plugins = explode(',',get_option( 'wllog_my_plugins' ));
+		$wxlog_my_plugins = explode(',',get_option( 'wxlog_my_plugins' ));
 		switch( $column_name ) {
 			case 'pluginname' :
 				return $item->name;
@@ -58,9 +58,9 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 
 
 	function column_cb( $item ) {
-		$wllog_my_plugins = explode(',',get_option( 'wllog_my_plugins' ));?>
+		$wxlog_my_plugins = explode(',',get_option( 'wxlog_my_plugins' ));?>
         <label class="screen-reader-text" for="cb-select-<?php echo $item->ID; ?>"><?php printf( __( 'Select %s' ), '消息' ); ?></label>
-        <input<?php if(in_array($item->ID,$wllog_my_plugins) and $item->status==2){ ?> checked="checked"<?php }?> <?php if($item->status!=2){ ?>  disabled="disabled"<?php }?>id="cb-select-<?php echo  $item->ID; ?>" type="checkbox" name="wxlog_plugins[]" value="<?php  echo  $item->ID; ?>" />
+        <input<?php if(in_array($item->ID,$wxlog_my_plugins) and $item->status==2){ ?> checked="checked"<?php }?> <?php if($item->status!=2){ ?>  disabled="disabled"<?php }?>id="cb-select-<?php echo  $item->ID; ?>" type="checkbox" name="wxlog_plugins[]" value="<?php  echo  $item->ID; ?>" />
         <div class="locked-indicator"></div>
 		<?php
 	}
@@ -71,7 +71,7 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 			<input type="hidden" name="page" value="wxlog_plugins_lists" />
 			<select name='action'>
 			<option value='-1' selected='selected'>批量操作</option>
-			<option value='wxlog_plugin_open' class="hide-if-no-js">开启</option>
+			<option value='wxlog_plugin_open' class="hide-if-no-js">开启/关闭</option>
 			</select>
 			<input type="submit" name="" id="doaction" class="button action" value="应用"  />
 		</div> 
@@ -110,10 +110,8 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 				<?php $this->pagination( $which ); ?>
 				<br class="clear" />
 			</div>
-		<?php  global $WXLOG; $WXLOG->add_inline_js("jQuery('#plusins_gg').load('http://www.phplog.com/?wxlog_plugins&gg=1');");
-		endif;
+		<?php endif;
 	}
-
 
 	//获取记录
 	function prepare_items() {
