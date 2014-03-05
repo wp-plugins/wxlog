@@ -123,10 +123,16 @@ class WL {
 				$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], stripslashes($custom_reply->content));
 			}elseif($custom_reply->msgtype=='news'){
 				$contentArr = array();
-				$contentArr[0]['title'] =  $custom_reply->title;
-				$contentArr[0]['description'] =  stripslashes($custom_reply->content);
-				$contentArr[0]['image_url'] =  $custom_reply->image_url;
-				$contentArr[0]['url'] =  $custom_reply->url;
+				$wxlog_news_list_title = explode('|phplogcom|',stripslashes($custom_reply->title));
+				$wxlog_news_list_url = explode('|phplogcom|',stripslashes($custom_reply->url));
+				$wxlog_news_list_image_url = explode('|phplogcom|',stripslashes($custom_reply->image_url));
+				$wxlog_news_list_description = explode('|phplogcom|',stripslashes($custom_reply->description));
+				foreach($wxlog_news_list_title as $key=>$value){
+					$contentArr[$key]['title'] =  $wxlog_news_list_title[$key];
+					$contentArr[$key]['description'] =  $wxlog_news_list_description[$key];
+					$contentArr[$key]['image_url'] =  $wxlog_news_list_image_url[$key];
+					$contentArr[$key]['url'] =  $wxlog_news_list_url[$key];
+				}
 				$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
 			}
 			if($resultStr){
@@ -137,14 +143,18 @@ class WL {
 
 
 		//调用官方插件
-		$wllog_my_plugins = get_option( 'wllog_my_plugins' );
-		if($wllog_my_plugins){
-			$content = file_get_contents('http://www.phplog.com/?wxlog_plugins&host='.$_SERVER['HTTP_HOST'].'&id='.$wllog_my_plugins.'&key='.$postArray['Content']);
-			if($content){
-				if(is_array($content)){
-					$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $content);
+		$wxlog_my_plugins = get_option( 'wxlog_my_plugins' );
+		if($wxlog_my_plugins){
+			//print_r($wxlog_my_plugins);
+			$content = file_get_contents('http://www.phplog.com/?wxlog_plugins&format=json&host='.$_SERVER['HTTP_HOST'].'&id='.$wxlog_my_plugins.'&key='.$postArray['Content']);
+			//print_r($content);
+			$content = json_decode($content);
+			//print_r($content);
+			if($content->content){
+				if(is_array($content->content)){
+					$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $content->content);
 				}else{
-					$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $content);
+					$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $content->content);
 				}
 				if($resultStr){
 					$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
@@ -155,7 +165,7 @@ class WL {
 		
 		//调用插件
 		$plugins = get_wxlog_plugins();
-		//d($plugins);
+		//print_r($plugins);
 		foreach($plugins as $key=>$value){
 			if(is_wxlog_plugin($value) and is_active_wxlog_plugin($key) and $value['key']==''){
 				if(file_exists(WP_PLUGIN_DIR .'/'. $key)){
@@ -271,7 +281,7 @@ class WL {
         $nonce = $_GET["nonce"]; 
         $token = TOKEN; 
         $tmpArr = array($token, $timestamp, $nonce);//print_r($tmpArr);
-        sort($tmpArr);//print_r($tmpArr);
+        sort($tmpArr,SORT_STRING);//print_r($tmpArr);
         $tmpStr = implode( $tmpArr );
         $tmpStr = sha1( $tmpStr );
   
@@ -294,7 +304,7 @@ class WL {
 <Content><![CDATA[%s]]></Content>
 <FuncFlag>0</FuncFlag>
 </xml>";
-		return sprintf($textTpl, wxlog_emoji(wxlog_qqface($contentStr)));
+		return sprintf($textTpl, str_replace('\r\n',"\r\n",wxlog_emoji(wxlog_qqface($contentStr))));
 	}
 
 	//回复图片消息
