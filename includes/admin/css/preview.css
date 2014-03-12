@@ -996,16 +996,16 @@ a.btnSecondary:active {
 	background: url(../images/cloud/filetype_guid_right17ced3.png) no-repeat;
 	right: -12px\9;
 }
-/*.you .cloudMesg .cloudArrow{
+.you .cloudMesg .cloudArrow{
 		position: absolute; 
 		left:-8px; 
 		left:-8px; 
 		top:10px;
 		width:17px;
 		height: 24px; 
-		background: url(../images/cloud/filetype_guid_left17ced3.png) no-repeat;
+		background: url(../images/preview/filetype_guid_left17ced3.png) no-repeat;
 		right:-12px\9;
-	}*/
+	}
 .chatPanel .cloud .file {
 	cursor: pointer;
 	box-shadow: 0px 1px 3px #9E9E9E;
@@ -1509,6 +1509,33 @@ a.btnSecondary:active {
 	right: -12px\9;
 	background: url(../images/preview/bubble_left_guid17ced3.png) no-repeat;
 }
+.you .chatItemContent_news1 {
+    position: relative;
+    _position: static;	
+}
+.you .chatItemContent_news1 .cloudArrow {
+	position: absolute;
+	left: -8px;
+	top: 17px;
+	width: 17px;
+	height: 24px;
+	right: -12px\9;
+	background: url(../images/preview/bubble_openapi17ced3.png) no-repeat;
+}
+
+.you .chatItemContent_news2 {
+    position: relative;
+    _position: static;	
+}
+.you .chatItemContent_news2 .cloudArrow {
+	position: absolute;
+	left: -8px;
+	top: 0px;
+	width: 17px;
+	height: 24px;
+	right: -12px\9;
+	background: url(../images/preview/bubble_openapi17ced3.png) no-repeat;
+}
 .me .cloudImg .cloudArrow {
 	position: absolute;
 	width: 18px;
@@ -1576,7 +1603,7 @@ a.btnSecondary:active {
 	width: 25px;
 	width: 25px\9;
 	height: 20px;
-	background: url("../images/icon_sound17ced3.png") no-repeat 0 -1px;
+	background: url("../images/preview/icon_sound17ced3.png") no-repeat 0 -1px;
 	cursor: pointer;
 	margin-left: 0px\9;
 }
@@ -1768,7 +1795,7 @@ a.btnSecondary:active {
 	top: 10px;
 	width: 13px;
 	height: 24px;
-	background: url(../images/cloud/bubble_openapi_right17ced3.png) no-repeat;
+	background: url(../images/preview/bubble_openapi_right17ced3.png) no-repeat;
 }
 .you .cloudMesg .cloudArrow {
 	position: absolute;
@@ -1776,7 +1803,7 @@ a.btnSecondary:active {
 	top: 10px;
 	width: 13px;
 	height: 24px;
-	background: url(../images/cloud/bubble_openapi17ced3.png) no-repeat;
+	background: url(../images/preview/bubble_openapi17ced3.png) no-repeat;
 }
 /* 加载更多消息 */
 .chatItem.chatListloadingMoreMsg {
