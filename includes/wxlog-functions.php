@@ -67,8 +67,9 @@ if(!function_exists('wxlog_make_signature')){
 }
 if(!function_exists('wxlog_xml_to_array')){
 	function wxlog_xml_to_array($xml){
-
 		$postObj = @simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+		//echo $xml;
+		//var_dump($postObj);
 		$arr['ToUserName'] = trim(@$postObj->ToUserName);
 		$arr['FromUserName'] = trim(@$postObj->FromUserName);
 		$arr['CreateTime'] = trim(@$postObj->CreateTime);
@@ -77,8 +78,8 @@ if(!function_exists('wxlog_xml_to_array')){
 			$arr['Content'] = trim(@$postObj->Content);
 		}
 		if($arr['MsgType']=='image'){
-			$arr['PicUrl'] = trim(@$postObj->PicUrl);
-			$arr['MediaId'] = trim(@$postObj->MediaId);
+			$arr['PicUrl'] = trim(@$postObj->Image->PicUrl);
+			$arr['MediaId'] = trim(@$postObj->Image->MediaId);
 			$arr['Content'] = $arr['PicUrl'];
 		}
 		if($arr['MsgType']=='voice'){
@@ -91,6 +92,12 @@ if(!function_exists('wxlog_xml_to_array')){
 		if($arr['MsgType']=='video'){
 			$arr['MediaId'] = trim(@$postObj->MediaId);
 			$arr['ThumbMediaId'] = trim(@$postObj->ThumbMediaId);
+		}
+		if($arr['MsgType']=='music'){
+			$arr['HQMusicUrl'] = trim(@$postObj->Music->HQMusicUrl);
+			$arr['MusicUrl'] = trim(@$postObj->Music->MusicUrl);
+			$arr['Description'] = trim(@$postObj->Music->Description);
+			$arr['Title'] = trim(@$postObj->Music->Title);
 		}
 		if($arr['MsgType']=='location'){
 			$arr['Location_X'] = trim(@$postObj->Location_X);
@@ -113,7 +120,6 @@ if(!function_exists('wxlog_xml_to_array')){
 				$arr['Longitude'] = trim(@$postObj->Longitude);
 				$arr['Precision'] = trim(@$postObj->Precision);
 			}
-
 			$event = strtolower($arr['Event']);
 			if($event == 'subscribe' || $event == 'unsubscribe'){ //订阅和取消订阅
 				$arr['Content'] = $event;
@@ -122,11 +128,11 @@ if(!function_exists('wxlog_xml_to_array')){
 			}elseif($event == 'view'){	//查看网页事件
 
 			}
-
 		}
 		if($arr['MsgType']!='event'){
 			$arr['MsgId'] = trim(@$postObj->MsgId);
 		}
+		//print_r($arr);
 		return $arr;
 	}
 }
@@ -302,7 +308,7 @@ if(!function_exists('get_wxlog_plugins')){
 			$wp_plugins[plugin_basename( $plugin_file )] = $plugin_data;
 		}
 
-		uasort( $wp_plugins, '_sort_uname_callback' );
+		@uasort( $wp_plugins, '_sort_uname_callback' );//插件排序
 
 		$cache_plugins[ $plugin_folder ] = $wp_plugins;
 		wp_cache_set('plugins', $cache_plugins, 'plugins');

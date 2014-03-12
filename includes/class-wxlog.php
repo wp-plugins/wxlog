@@ -129,12 +129,32 @@ class WL {
 				$wxlog_news_list_description = explode('|phplogcom|',stripslashes($custom_reply->description));
 				foreach($wxlog_news_list_title as $key=>$value){
 					$contentArr[$key]['title'] =  $wxlog_news_list_title[$key];
-					$contentArr[$key]['description'] =  $wxlog_news_list_description[$key];
+					if($key==0){
+						$contentArr[$key]['description'] =  $custom_reply->content;
+					}
 					$contentArr[$key]['image_url'] =  $wxlog_news_list_image_url[$key];
 					$contentArr[$key]['url'] =  $wxlog_news_list_url[$key];
 				}
 				$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
-			}
+			}elseif($custom_reply->msgtype=='music'){
+				$contentArr = array();
+				$contentArr['title'] =  $custom_reply->title;
+				$contentArr['description'] =  $custom_reply->content;
+				$contentArr['image_url'] =  $custom_reply->image_url;
+				$contentArr['url'] =  $custom_reply->url;
+				$resultStr = $this->reply_music($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+			}elseif($custom_reply->msgtype=='post'){
+				$contentArr = $this->get_posts($custom_reply->title,$custom_reply->content);
+				if($contentArr){
+					if(is_array($contentArr)){
+						$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+						if($resultStr){
+							$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
+							exit($resultStr);
+						}
+					}
+				}
+			}			
 			if($resultStr){
 				$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
 				exit($resultStr);
@@ -205,6 +225,21 @@ class WL {
 			}
 		}
 		
+		//是否开启小黄鸡，可以到高级里设置。
+		if(get_option( 'wxlog_simsimi' )){
+			$simsimi_keyword = get_option( 'wxlog_simsimi_keyword' );
+			if(!in_array($postArray['Content'],explode(',',$simsimi_keyword))){
+				$contentStr = $this->simsimi( $postArray['Content'] );
+				if($contentStr){
+					$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $contentStr);
+					if($resultStr){
+						$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
+						exit($resultStr);
+					}
+				}
+			}
+		}		
+		
 		//默认的回复内容		
 		$contentStr = get_option( 'wxlog_default_content' );
 		if($contentStr){
@@ -217,34 +252,44 @@ class WL {
     }
 
 	//查询数据库
-	public function get_posts($keyword){
+	public function get_posts($keyword,$query_array=''){
 		$post_max = ( $wxlog_post_max = get_option( 'wxlog_post_max' ) ) ? $wxlog_post_max : '5';
-		switch ($keyword) {
-			case get_option( 'wxlog_post_new' ) :
-			 	break;
-			case get_option( 'wxlog_post_hot' ) :
-				if(get_option( 'wxlog_post_hot_field_name' )){
-					$query_array['meta_key'] = 'views';//访问统计的字段名
-					$query_array['orderby'] = 'meta_value_num';
+		if($query_array){
+			
+		}else{
+			switch ($keyword) {
+				case get_option( 'wxlog_post_new' ) :
+					break;
+				case get_option( 'wxlog_post_hot' ) :
+					if(get_option( 'wxlog_post_hot_field_name' )){
+						$query_array['meta_key'] = 'views';//访问统计的字段名
+						$query_array['orderby'] = 'meta_value_num';
+						$query_array['order'] = 'DESC';
+						break;
+					}
+				case get_option( 'wxlog_post_hot_comment' ) :
+					$query_array['orderby'] = 'comment_count';
 					$query_array['order'] = 'DESC';
 					break;
-				}
-			case get_option( 'wxlog_post_hot_comment' ) :
-				$query_array['orderby'] = 'comment_count';
-				$query_array['order'] = 'DESC';
-				break;
-			case in_array($keyword,explode(',',str_replace('，',',',get_option( 'wxlog_post_category' )))) :
-				$query_array['cat'] = $keyword;
-			 	break;
-			default :
-				$query_array['s'] = $keyword;
-				break;
-		}//print_r($query_array);
+				case in_array($keyword,explode(',',str_replace('，',',',get_option( 'wxlog_post_category' )))) :
+					$query_array['cat'] = $keyword;
+					break;
+				default :
+					$query_array['s'] = $keyword;
+					break;
+			}//print_r($query_array);
+			
+			$query_array['showposts'] = $post_max;
+			$query_array['posts_per_page'] = $post_max;
+			$query_array['post_status'] = 'publish';
+			$query_array['ignore_sticky_posts'] = 1;
+			
+			$post_type = get_option( 'wxlog_post_type' );
+			if($post_type){
+				$query_array['post_type'] = explode(',',$post_type);
+			}
+		}
 		
-		$query_array['showposts'] = $post_max;
-		$query_array['posts_per_page'] = $post_max;
-		$query_array['post_status'] = 'publish';
-		$query_array['ignore_sticky_posts'] = 1;
 		$query = new WP_Query($query_array);
 		$contentArr = '';
 		$i = 0;
@@ -264,6 +309,35 @@ class WL {
 			}
 		}
 		return $contentArr;
+	}
+
+
+	//小黄鸡智能机器人接口
+	public function simsimi( $keyword ){
+		if ( $keyword<>'' ){
+			$curlPost = 'para='.$keyword;
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, 'http://www.xiaohuangji.com/ajax.php');
+			curl_setopt($curl, CURLOPT_HEADER, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_NOBODY, true);
+			curl_setopt($curl, CURLOPT_POST, true);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+			$return_str = curl_exec($curl);
+			$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+			if ($return_str === false) {
+				return false;//连接失败
+			}
+			if ($http_code !== 200) {
+				return false;//连接失败
+			}		
+			curl_close($curl);
+			if(md5($return_str)=='3f46a0d792a6a4104c11283d4768192d'){
+				//抱歉，小黄鸡还不能理解，求您教我,使用"问...答....."句式(不准带标点~)
+				return false;
+			}
+			return $return_str;
+		}return false;
 	}
 
 	//公众平台绑定验证
@@ -308,29 +382,50 @@ class WL {
 	}
 
 	//回复图片消息
-    public function reply_image($toUsername, $fromUsername, $contentStr){
-		$textTpl = "官方未开放";
-		return sprintf($textTpl, $contentStr);
+    public function reply_image($toUsername, $fromUsername, $contentArr){
+		$imageTpl = "<xml>
+<ToUserName><![CDATA[".$toUsername."]]></ToUserName>
+<FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
+<CreateTime>".time()."</CreateTime>
+<MsgType><![CDATA[image]]></MsgType>
+<Image>
+<PicUrl><![CDATA[".$contentArr['PicUrl']."]]></PicUrl>
+<MediaId><![CDATA[".$contentArr['MediaId']."]]></MediaId>
+</Image>
+</xml>";
+		return $imageTpl;
 	}
 
 	//回复语音消息
     public function reply_voice($toUsername, $fromUsername, $contentStr){
-		$textTpl = "官方未开放";
-		return sprintf($textTpl, $contentStr);
+		$voiceTpl = "官方未开放";
+		return sprintf($voiceTpl, $contentStr);
 	}
 	
 	
 	//回复视频消息
     public function reply_video($toUsername, $fromUsername, $contentStr){
-		$textTpl = "官方未开放";
-		return sprintf($textTpl, $contentStr);
+		$videoTpl = "官方未开放";
+		return sprintf($videoTpl, $contentStr);
 	}	
 
 
 	//回复音乐消息
-    public function reply_music($toUsername, $fromUsername, $contentStr){
-		$textTpl = "官方未开放";
-		return sprintf($textTpl, $contentStr);
+    public function reply_music($toUsername, $fromUsername, $contentArr){
+		$musicTpl = "<xml>
+<ToUserName><![CDATA[".$toUsername."]]></ToUserName>
+<FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
+<CreateTime>".time()."</CreateTime>
+<MsgType><![CDATA[music]]></MsgType>
+<Music>
+<HQMusicUrl><![CDATA[".$contentArr['image_url']."]]></HQMusicUrl>
+<MusicUrl><![CDATA[".$contentArr['url']."]]></MusicUrl>
+<Description><![CDATA[".$contentArr['description']."]]></Description>
+<Title><![CDATA[".$contentArr['title']."]]></Title>
+</Music>
+<FuncFlag>0</FuncFlag>
+</xml>";
+		return $musicTpl;
 	}	
 
 	//回复图文消息
@@ -338,12 +433,20 @@ class WL {
 		$contentStr = '';
 		foreach($contentArr as $value){
 			if(!$value['description']) $value['description'] = $value['title'];
+			if($value['image_url']){
 			$contentStr .= '<item>
-<Title><![CDATA['.html_entity_decode($value['title'], ENT_QUOTES, "utf-8" ).']]></Title>
-<Description><![CDATA['.html_entity_decode($value['description'], ENT_QUOTES, "utf-8" ).']]></Description>
-<PicUrl><![CDATA['.$value['image_url'].']]></PicUrl>
 <Url><![CDATA['.$value['url'].']]></Url>
+<PicUrl><![CDATA['.$value['image_url'].']]></PicUrl>
+<Description><![CDATA['.html_entity_decode($value['description'], ENT_QUOTES, "utf-8" ).']]></Description>
+<Title><![CDATA['.html_entity_decode($value['title'], ENT_QUOTES, "utf-8" ).']]></Title>
 </item>';
+			}else{
+			$contentStr .= '<item>
+<Url><![CDATA['.$value['url'].']]></Url>
+<Description><![CDATA['.html_entity_decode($value['description'], ENT_QUOTES, "utf-8" ).']]></Description>
+<Title><![CDATA['.html_entity_decode($value['title'], ENT_QUOTES, "utf-8" ).']]></Title>
+</item>';
+			}
 		}
 		$newsTpl = "<xml>
 <ToUserName><![CDATA[".$toUsername."]]></ToUserName>
