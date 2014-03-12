@@ -231,7 +231,6 @@ function get_msgtype(msgtype){
 			return false;	
 		});				
 	");}
-
 }
 
 new WXLOG_Test();

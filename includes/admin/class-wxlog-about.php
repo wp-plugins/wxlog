@@ -33,7 +33,8 @@ WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_b
 3 调用官方免费插件
 4 调用WP插件
 5 调用WP数据
-6 默认的回复内容	
+6 小黄鸡聊天	
+7 默认的回复内容	
 
 <b>配置步骤</b>
 第一步 进入微信日志的配置页面设置 Token 设置为：你的Token

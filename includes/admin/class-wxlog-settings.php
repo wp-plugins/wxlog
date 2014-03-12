@@ -101,7 +101,13 @@ class WXLOG_Settings {
 							'std' 		=> '',//初始值
 							'label' 	=> '按分类回复文章',
 							'desc'		=> '这里填写文章的分类ID，多个ID用英文,号隔开',
-						),							
+						),
+						array(
+							'name' 		=> 'wxlog_post_type',
+							'std' 		=> 'post,page,dlm_download',//初始值
+							'label' 	=> '按类型回复文章',
+							'desc'		=> '这里填写文章的类别名称，多个类别用英文,号隔开',
+						),													
 					)
 				),		
 				'advanced' => array('高级',
@@ -113,7 +119,23 @@ class WXLOG_Settings {
 							'label' 	=> '是否开启文本日志',
 							'desc'		=> '日志保存在/wp-content/uploads/wxlog_logs/目录下',
 							'type' 		=> 'checkbox'
-						),						
+						),
+						array(
+							'name' 		=> 'wxlog_simsimi',
+							'cb_label'  => '开启',
+							'std' 		=> '1',
+							'label' 	=> '是否开启小黄鸡',
+							'desc'		=> '开启小黄鸡聊天',
+							'type' 		=> 'checkbox'
+						),
+						array(
+							'name' 		=> 'wxlog_simsimi_keyword',
+							'std' 		=> '',//初始值
+							'label' 	=> '小黄鸡关键字过滤',
+							'placeholder' => '请输要过滤的关键字',//背景提示
+							'desc'		=> '小黄鸡关键字过滤，多个关键字请用英文,号隔开',
+							'type' 			=> 'textarea'
+						),																	
 					)
 				)
 			)
