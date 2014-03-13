@@ -104,7 +104,7 @@ class WXLOG_Settings {
 						),
 						array(
 							'name' 		=> 'wxlog_post_type',
-							'std' 		=> 'post,page,dlm_download',//初始值
+							'std' 		=> 'post,page',//初始值
 							'label' 	=> '按类型回复文章',
 							'desc'		=> '这里填写文章的类别名称，多个类别用英文,号隔开',
 						),													
