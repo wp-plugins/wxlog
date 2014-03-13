@@ -78,8 +78,12 @@ if(!function_exists('wxlog_xml_to_array')){
 			$arr['Content'] = trim(@$postObj->Content);
 		}
 		if($arr['MsgType']=='image'){
-			$arr['PicUrl'] = trim(@$postObj->Image->PicUrl);
-			$arr['MediaId'] = trim(@$postObj->Image->MediaId);
+			if(@$postObj->Image->PicUrl){
+				$arr['PicUrl'] = trim(@$postObj->Image->PicUrl);
+				$arr['MediaId'] = trim(@$postObj->Image->MediaId);
+			}else{
+				$arr['PicUrl'] = trim(@$postObj->PicUrl);
+			}
 			$arr['Content'] = $arr['PicUrl'];
 		}
 		if($arr['MsgType']=='voice'){
