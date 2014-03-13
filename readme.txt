@@ -2,7 +2,7 @@
 Name: 微信日志 For Wordpress
 Contributors: zhangji
 Link: http://www.phplog.com/wxlog
-Tags: 微信日志,wxlog,微信,weixin,wx,PHP日志,phplog,易信,yixin,yx
+Tags: weixin,wx,微信,wxlog,微信日志,PHP日志,phplog,易信,yixin,yx
 Requires at least: 3.8
 Tested up to: 3.8
 License: GPLv3
@@ -53,6 +53,11 @@ License: GPLv3
 1、本插件是在Wordpress3.8基础上开发的。
 
 == Changelog ==
+
+
+= 1.0.9 =
+* 消息日志增加关键字筛选
+
 
 = 1.0.8 =
 * 修复自定义回复支持多图文，的内容不能超过200个字
