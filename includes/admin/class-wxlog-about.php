@@ -37,9 +37,9 @@ WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_b
 7 默认的回复内容	
 
 <b>配置步骤</b>
-第一步 进入微信日志的配置页面设置 Token 设置为：你的Token
-第二步 登录微信公众平台进行设置 URL（如：http://www.phplog.com/?wxlog，其中的wxlog就是你的Token
-	
+第一步 进入微信日志的配置页面设置Token为abc
+第二步 登录微信公众平台进行设置 URL（如：http://www.xxx.com/?abc）
+注：其中的abc是可以任意改的，xxx是你的域名	
 
           </pre>  </div>
           
