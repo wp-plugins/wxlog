@@ -121,7 +121,7 @@ class WXLOG_Custom_reply_edit {
 
  
             <tr valign="top"><th scope="row"><span class="set-post">检索条件</span><span class="set-text">回复内容</span><span class="set-news">第一条描述内容</span><span class="set-music">音乐描述内容</span></th><td>
-            <textarea name="content" id="content" cols="50" rows="3" style="height:280px;" class="regluar-text ltr"><?=stripslashes($custom_reply->content)?></textarea><p class="set-news description">多图文回复的第一条描述内容</p><p class="set-psot description"><code>例：cat=3&year=2014&tag=php+mysql&orderby=date&order=ASC</code> <br><code>参考：<a href="http://www.phplog.com/detail/365.html">http://www.phplog.com/detail/365.html</a></code></p>
+            <textarea name="content" id="content" cols="50" rows="3" style="height:280px;" class="regluar-text ltr"><?=stripslashes($custom_reply->content)?></textarea><p class="set-news description">多图文回复的第一条描述内容</p><p class="set-post description"><code>例：cat=3&year=2014&tag=php+mysql&orderby=date&order=ASC</code> <br><code>参考：<a href="http://www.phplog.com/detail/365.html">http://www.phplog.com/detail/365.html</a></code></p>
             </td></tr>
 
             <tr valign="top"><th scope="row">是否有效</th><td>
