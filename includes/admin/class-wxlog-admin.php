@@ -73,6 +73,7 @@ class WXLOG_Admin {
 </ul>
 
   <form id="wxlog_log" action="" method="get">
+    <?php $WXLOG_Log->search_form(); ?>
     <?php $WXLOG_Log->display() ?>
   </form>
 </div>

@@ -141,7 +141,7 @@ class WXLOG_Log extends WP_List_Table {
 	//筛选
 	public function display_tablenav( $which ) {
 		if ( 'top' == $which ) : ?>
-		<div class="tablenav <?php echo esc_attr( $which ); ?>">
+		<div class="tablenav <?php echo esc_attr( $which ); ?>" style="position: relative;">
 				<div class="alignleft actions">
 					<input type="hidden" name="page" value="wxlog_log" />
 					<select name="filter_status">
@@ -185,7 +185,8 @@ class WXLOG_Log extends WP_List_Table {
 						<option value="100" <?php selected( $this->logs_per_page, 100 ) ?>>每页100行</option>
 						<option value="200" <?php selected( $this->logs_per_page, 200 ) ?>>每页200行</option>
 						<option value="-1" <?php selected( $this->logs_per_page, -1 ) ?>>显示全部</option>
-					</select>
+					</select>                  
+                    
 					<input type="submit" value="筛选" class="button" />
 				</div>
 			<?php
@@ -216,6 +217,21 @@ class WXLOG_Log extends WP_List_Table {
 	}
 
 
+	function search_form() {global $wpdb;?>
+    
+        <p class="search-box">
+        <label class="screen-reader-text" for="post-search-input">搜索日志:</label>
+            <input id="post-search-input" name="k" type="search" value="<?=$_REQUEST['k']?>" list="fruits" />   
+            <datalist id="fruits">
+                <?php $keyword = $wpdb->get_results("SELECT keyword FROM {$wpdb->wxlog_custom_reply} WHERE status=2 ORDER BY timestamp DESC");
+                    //print_r($keyword);
+                    foreach($keyword as $value){?>
+                        <option value="<?=$value->keyword?>" <?php selected( $_GET['k'], $value->keyword ) ?>><?=$value->keyword?></option>	
+                <?php }?>
+            </datalist>          
+        <input class="button" id="search-submit" type="submit" value="搜索日志"></p>  
+
+	<?php }
 	function prepare_items() {
 		global $wpdb;
 
@@ -245,18 +261,23 @@ class WXLOG_Log extends WP_List_Table {
 		if ( $this->filter_month )
 			$query_where .= " AND timestamp <= '" . date( 'Y-m-t', strtotime( $this->filter_month ) ) . "' ";
 
+		if ( $_REQUEST['k'] )
+				$query_where .= " AND `content` like '%".$_REQUEST['k']."%' ";//echo 'asdfasdf';
+
 		//总数
 		$total_items = $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->wxlog_log} WHERE {$query_where};" );
 
 		//列表数据
-		$this->items = $wpdb->get_results(
+		/*$this->items = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT * FROM {$wpdb->wxlog_log} WHERE {$query_where} ORDER BY timestamp DESC LIMIT %d, %d;",
 				( $current_page - 1 ) * $per_page,
 				$per_page
 			)
-		);
+		);*/
 		
+		$this->items = $wpdb->get_results("SELECT * FROM {$wpdb->wxlog_log} WHERE {$query_where} ORDER BY timestamp DESC LIMIT ".( $current_page - 1 ) * $per_page.",{$per_page}");
+
 		//print_r("SELECT COUNT(ID) FROM {$wpdb->wxlog_log} WHERE {$query_where};");
 		//print_r($this->items);
 		

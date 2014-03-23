@@ -41,12 +41,23 @@ WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_b
 第二步 登录微信公众平台进行设置 URL（如：http://www.xxx.com/?abc）
 注：其中的abc是可以任意改的，xxx是你的域名	
 
+<b>高级接口功能演示</b>
+<img src="http://mmbiz.qpic.cn/mmbiz/MN9J2IGQ3YZaPA2eHHcRdBd1TTXpYiauE7ia0roJeWLGWqNsSfibHdaShlPwY9qKUKPSlzXdSDGX81YgQyUhxutnA/0" />
+
+因为这是一个测试号，只允许20个人关注，所以请大家测试完就取消关注吧，谢谢。
+
+
+
+
           </pre>  </div>
           
           
 		</div>
 		<?php  global $WXLOG; $WXLOG->add_inline_js("jQuery('#wxlog_news').load('http://www.phplog.com/?wxlog_plugins&wn=1');");
 	}
+
+
+
 
 }
 

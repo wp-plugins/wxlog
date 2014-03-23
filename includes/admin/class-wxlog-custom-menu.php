@@ -9,9 +9,10 @@ class WXLOG_Custom_menu {
 		if($_POST['button']){
 			$button = $this->make_menu($_POST['button']);
 			$access_token = $this->access_token();
-			$_POST['wxlog_custom_menu'] = '{"menu":'.$button.'}';
+			$_POST['wxlog_custom_menu'] = '';
 			if($access_token){
-				$con = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$access_token);
+				//如果删除再创建会有延时24小时
+				//$con = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$access_token);
 			 	$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
 				$con = $this->get_json($url,$button);
 			}
@@ -126,22 +127,8 @@ class WXLOG_Custom_menu {
 				'custom_menu' => array('自定义菜单',
 					array(
 						array(
-							'name' 		=> 'wxlog_AppId',
-							'std' 		=> '',//初始值
-							'placeholder'	=> '请输入AppId',//背景提示
-							'label' 	=> 'AppId',
-							'desc'		=> sprintf( '微信公众平台 <code>%s</code>', 'http://mp.weixin.qq.com/' )
-						),
-						array(
-							'name' 		=> 'wxlog_AppSecret',
-							'std' 		=> '',//初始值
-							'placeholder'	=> '请输入AppSecret',//背景提示
-							'label' 	=> 'AppSecret',
-							'desc'		=> sprintf( '微信公众平台 <code>%s</code>', 'http://mp.weixin.qq.com/' )
-						),
-						array(
 							'name' 		=> 'wxlog_custom_menu',
-							'std' 		=> json_encode($get_menu->menu->button),//初始值
+							'std' 		=> '',//初始值
 							'label' 	=> '菜单',
 							'placeholder' => '',//背景提示
 							'desc'		=> '只要正确输入AppId和AppSecret就能自动获取到菜单，自定义菜单编辑后将在24小时后对所有用户生效或重新关注亦可生效。',
@@ -183,75 +170,24 @@ class WXLOG_Custom_menu {
 
     <div class="wrap">
       <form method="post" id="options_form" action="options.php">
-        <?php settings_fields( 'wxlog_custom_menu' ); ?>
+        <?php
+		
+		
+		
+		
+		
+		 settings_fields( 'wxlog_custom_menu' ); ?>
         <?php screen_icon(); ?>
         <h2 class="nav-tab-wrapper">
           <?php
-                            foreach ( $this->settings as $key => $section ) {
-                                echo '<a href="#settings-' . sanitize_title( $key ) . '" class="nav-tab">' . esc_html( $section[0] ) . '</a>';
-                            }
-                        ?>
-        </h2>
-        <br/>
-        <?php
-                        if ( ! empty( $_GET['settings-updated'] ) ) {
-                            flush_rewrite_rules();
-                            echo '<div class="updated fade"><p>自定义菜单已保存。</p></div>';
-                        }
-                        foreach ( $this->settings as $key => $section ) {
-                            echo '<div id="settings-' . sanitize_title( $key ) . '" class="settings_panel">';
-                            echo '<table class="form-table">';
-                            foreach ( $section[1] as $option ) {
-                                $placeholder = ( ! empty( $option['placeholder'] ) ) ? 'placeholder="' . $option['placeholder'] . '"' : '';
-                                echo '<tr valign="top"><th scope="row"><label for="setting-' . $option['name'] . '">' . $option['label'] . '</a></th><td>';
-                                if ( ! isset( $option['type'] ) ) $option['type'] = '';
-                                $value = get_option( $option['name'] );
-                                switch ( $option['type'] ) {
-                                    case "checkbox" :
-                                        ?>
-        <label>
-          <input id="setting-<?php echo $option['name']; ?>" name="<?php echo $option['name']; ?>" type="checkbox" value="1" <?php checked( '1', $value ); ?> />
-          <?php echo $option['cb_label']; ?></label>
-        <?php
-                                        if ( $option['desc'] )
-                                            echo ' <p class="description">' . $option['desc'] . '</p>';
-                                    break;
-                                    case "textarea" :
-                                        if($option['name']=='wxlog_custom_menu'){
-                                            $this->wxlog_custom_menu($value);
-                                        }
-                                        ?>
-        <textarea style="display:none;" id="setting-<?php echo $option['name']; ?>" class="large-text" cols="50" rows="3" name="<?php echo $option['name']; ?>" <?php echo $placeholder; ?>><?php echo esc_textarea( $value ); ?></textarea>
-        <?php
-                                        if ( $option['desc'] )
-                                            echo ' <p class="description">' . $option['desc'] . '</p>';
-                                    break;
-                                    case "select" :
-                                        ?>
-        <select id="setting-<?php echo $option['name']; ?>" class="regular-text" name="<?php echo $option['name']; ?>">
-          <?php
-                                            foreach( $option['options'] as $key => $name )
-                                                echo '<option value="' . esc_attr( $key ) . '" ' . selected( $value, $key, false ) . '>' . esc_html( $name ) . '</option>';
-                                        ?>
-        </select>
-        <?php
-                                        if ( $option['desc'] )
-                                            echo ' <p class="description">' . $option['desc'] . '</p>';
-                                    break;							
-                                    
-                                    default :
-                                        ?>
-        <input id="setting-<?php echo $option['name']; ?>" class="regular-text" type="text" name="<?php echo $option['name']; ?>" value="<?php esc_attr_e( $value ); ?>" <?php echo $placeholder; ?> />
-        <?php
-                                        if ( $option['desc'] )
-                                            echo ' <p class="description">' . $option['desc'] . '</p>';
-                                    break;
-                                }
-                                echo '</td></tr>';
-                            }
-                            echo '</table></div>';
-                        }
-                    ?>
+				foreach ( $this->settings as $key => $section ) {
+					echo '<a href="#settings-' . sanitize_title( $key ) . '" class="nav-tab">' . esc_html( $section[0] ) . '</a>';
+				}
+			?>
+			</h2>
+			<br/>
+			<?php $this->wxlog_custom_menu($value);
+		?>
         <p class="submit">
           <input type="button" class="button-primary" value="保存设置" />
         </p>
@@ -271,17 +207,15 @@ class WXLOG_Custom_menu {
         //初始化设置
         private function wxlog_custom_menu($menu) {
             $access_token = $this->access_token();
-            if($menu=='null' or empty($menu) and $access_token){
-                $menu = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$access_token);
-            }
-            $get_menu = json_decode($menu);
-            
-            //echo '<pre>';print_r($get_menu->menu->button);
-            //echo '<pre>';print_r($_POST);
             if($access_token){
+                $menu = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$access_token);
+				$get_menu = json_decode($menu);
+				//echo '<pre>';print_r($get_menu->menu->button);
+				//echo '<pre>';print_r($_POST);
     ?>
     
     <input type="button" value=" 增加一级菜单 " onClick="add_menu1();">
+    <textarea style="display:none;" class="large-text" cols="50" rows="3">实时获取：<?php echo file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$access_token); ?></textarea>
     
         <div id="dashboard-widgets-wrap">
           <div id="dashboard-widgets" class="metabox-holder">
@@ -293,12 +227,12 @@ class WXLOG_Custom_menu {
                 <div id="m_<?=$key+1?>" class="postbox">
                   <div class="handlediv" title="点击以切换"><br /></div>
                   <h3 class='hndle'> <span>一级名称：</span>
-                    <input names="button[][name]" type="text" value="<?=$value->name?>" class="ts" />
+                    <input names="button[][name]" type="text" value="<?=$value->name?>" class="widefatzj" />
                     <span>关键字：<span>
                         <?php  if($value->url){?>
-                      <input names="button[][key]" type="text" value="<?=$value->url?>" class="ts" />
+                      <input names="button[][key]" type="text" value="<?=$value->url?>" class="widefatzj" />
                         <?php }else{?>
-                      <input names="button[][key]" type="text" value="<?=$value->key?>" class="ts" />
+                      <input names="button[][key]" type="text" value="<?=$value->key?>" class="widefatzj" />
                         <?php }?>
                     <a href="javascript:del_menu('m_<?=$key+1?>');">删除</a> | <a href="javascript:add_menu2('<?=$key+1?>');">新增子菜单</a> </h3>
                   <div class="inside">
@@ -337,7 +271,6 @@ class WXLOG_Custom_menu {
         </div>
         <!-- dashboard-widgets-wrap --> 
     
-    <textarea style="display:none;" class="large-text" cols="50" rows="3">实时获取：<?php echo file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$access_token); ?></textarea>
     
     <script>
     jQuery(document).ready(function(){
@@ -345,7 +278,7 @@ class WXLOG_Custom_menu {
         jQuery(".button-primary").click(function(){
             goto();
         });
-        jQuery("#setting-wxlog_custom_menu").val('<?=$menu?>');	
+        //jQuery("#setting-wxlog_custom_menu").val('<?=$menu?>');	
     });	
     function goto(){
         var _name = jQuery("input[names='button[][name]']");
@@ -418,7 +351,6 @@ class WXLOG_Custom_menu {
         '</div>');
     }
     
-    
     //删除行
     function add_menu1(){
         var menu1=jQuery(".postbox");
@@ -429,9 +361,9 @@ class WXLOG_Custom_menu {
         jQuery("#normal-sortables").append('<div id="m_'+(len+1)+'" class="postbox" >'+
                   '<div class="handlediv" title="点击以切换"><br /></div>'+
                   '<h3 class="hndle"> <span>一级名称：</span>'+
-                    '<input names="button[][name]" type="text" value="" class="ts" />'+
+                    '<input names="button[][name]" type="text" value="" class="widefatzj" />'+
                     '<span>关键字：<span>'+
-                    '<input names="button[][key]" type="text" value="" class="ts" />'+
+                    '<input names="button[][key]" type="text" value="" class="widefatzj" />'+
                     ' <a href="javascript:del_menu(\'m_'+(len+1)+'\');">删除</a> | <a href="javascript:add_menu2(\''+(len+1)+'\');">新增子菜单</a>'+
                   '</h3>'+
                   '<div class="inside">'+
@@ -453,7 +385,7 @@ class WXLOG_Custom_menu {
     
     wp_enqueue_script( 'dashboard' );
     wp_enqueue_script('admin-widgets');
-            }else{echo '<div class="error fade below-h2"><p>获取自定义权限失败。</p></div>';?>
+            }else{echo '<div class="error fade below-h2"><p>获取自定义权限失败。请先设置微信高级接口的AppId和AppSecret <a href="/wp-admin/admin.php?page=wxlog_setting">点击这里设置</a></p></div>';?>
                 
     <script>
     jQuery(document).ready(function(){

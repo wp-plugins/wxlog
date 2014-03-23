@@ -14,7 +14,7 @@ class WXLOG_Settings {
 		global $WXLOG;
 		$this->settings = apply_filters( 'wxlog_settings',
 			array(
-				'general' => array('基本设置',
+				'general' => array('微信',
 					array(
 						array(
 							'name' 		=> 'wxlog_token',
@@ -23,6 +23,24 @@ class WXLOG_Settings {
 							'label' 	=> '微信 Token',
 							'desc'		=> sprintf( '微信公众平台 <code>%s</code>', 'http://mp.weixin.qq.com/' )
 						),
+						array(
+							'name' 		=> 'wxlog_AppId',
+							'std' 		=> '',//初始值
+							'placeholder'	=> '请输入AppId',//背景提示
+							'label' 	=> '微信 AppId',
+							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单'
+						),
+						array(
+							'name' 		=> 'wxlog_AppSecret',
+							'std' 		=> '',//初始值
+							'placeholder'	=> '请输入AppSecret',//背景提示
+							'label' 	=> '微信 AppSecret',
+							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单'
+						),	
+					),
+				),
+				'basic_reply' => array('基本回复',
+					array(
 						array(
 							'name' 		=> 'wxlog_blacklist_user',
 							'std' 		=> '',//初始值
@@ -34,7 +52,7 @@ class WXLOG_Settings {
 						array(
 							'name' 		=> 'wxlog_blacklist_message_custom',
 							'std' 		=> '您已经被管理员列入黑名单',
-							'label' 	=> '黑名单自动回内容',
+							'label' 	=> '黑名单回复内容',
 							'desc'		=> '如果为空将不回复内容，也不会继续获取其他的内容'
 						),
 						array(
