@@ -1,4 +1,9 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+<?php
+
+if(!isset($_GET['echostr']))
+	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+//define( "TOKEN", 'wxlog' );
 
 class WL {
 
@@ -6,6 +11,9 @@ class WL {
 	
 	public function __construct() {
 		global $wpdb;
+
+		if(isset($_GET['echostr']))
+			$this->valid();//第一次验证
 
 		if(get_option( 'wxlog_txt_log' )){
 			$upload_dir = wp_upload_dir();
@@ -16,8 +24,6 @@ class WL {
 			wxlog($dir.date("Y-m-d").'.txt','HTTP_RAW_POST_DATA:'.var_export(@$GLOBALS["HTTP_RAW_POST_DATA"], TRUE));		
 		}
 			
-		if(isset($_GET['echostr']))
-			$this->valid();//第一次验证
 		
 		$postStr = (isset($GLOBALS["HTTP_RAW_POST_DATA"]))?$GLOBALS["HTTP_RAW_POST_DATA"]:'';
 		if($_POST["test"]){
@@ -93,7 +99,7 @@ class WL {
 		}
 		$postArray['Content'] = strtolower($postArray['Content']);
 
-		//黑名单过滤		
+		//黑名单过滤	
 		$wxlog_blacklist_user = get_option( 'wxlog_blacklist_user' );
 		if($wxlog_blacklist_user){
 			$contentStr = get_option( 'wxlog_blacklist_message_custom' );
@@ -193,6 +199,7 @@ class WL {
 				}
 				$classname = $value['ClassName'];
 				if(class_exists($classname)){
+					//echo $classname;
 					$pluginObj = new $classname;
 					$content = $pluginObj->get_content( $postArray['Content'] );
 					if($content){
@@ -238,7 +245,7 @@ class WL {
 					}
 				}
 			}
-		}		
+		}
 		
 		//默认的回复内容		
 		$contentStr = get_option( 'wxlog_default_content' );
@@ -353,7 +360,7 @@ class WL {
         $signature = $_GET["signature"]; 
         $timestamp = $_GET["timestamp"]; 
         $nonce = $_GET["nonce"]; 
-        $token = TOKEN; 
+        $token = TOKEN;
         $tmpArr = array($token, $timestamp, $nonce);//print_r($tmpArr);
         sort($tmpArr,SORT_STRING);//print_r($tmpArr);
         $tmpStr = implode( $tmpArr );
