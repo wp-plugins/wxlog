@@ -10,6 +10,20 @@
 #wxlog_log .column-user_ip,#wxlog_log .column-user_agent{font-family:monospace;font-weight:400}
 #wxlog_log span.description{font-weight:400}
 
+.widefatzj {
+	border-spacing: 0;
+	clear: both;
+	margin: 0;
+}	
+
+@media screen and ( max-width: 680px ) {
+	.widefatzj {
+		border-spacing: 0;
+		width: 100%;
+		clear: both;
+		margin: 0;
+	}	
+}
 
 /*wp-admin-rtl.css 11622行*/
 @media screen and ( max-width: 782px ) {
@@ -20,6 +34,7 @@
 	.fixed .column-msgtype {
 		display: none;
 	}
+	
 	
 	.tablenav .tablenav-pages a {
 		padding: 3px 12px 6px;
@@ -36,7 +51,7 @@
 
 
 
-
+#wxlog_plugins_lists .column-pluginname{width:10em}
 #wxlog_plugins_lists .column-timestamp{width:6em}
 #wxlog_plugins_lists .column-msgtype{width:6em}
 #wxlog_plugins_lists .column-status{width:4em;vertical-align:middle;text-align:center}
