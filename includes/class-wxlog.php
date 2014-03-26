@@ -1,10 +1,8 @@
 <?php
 
-if(isset($_GET['echostr'])){
-	if(isset($_GET['token'])){
-		define( "TOKEN", $_GET['token'] );
-		//http://www.phplog.com/wp-content/plugins/wxlog/includes/class-wxlog.php?token=wxlog
-	}
+if(isset($_GET['echostr']) or isset($_GET['token'])){
+	define( "TOKEN", $_GET['token'] );
+	//http://www.phplog.com/wp-content/plugins/wxlog/includes/class-wxlog.php?token=wxlog
 }else{
 	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 }
@@ -19,6 +17,22 @@ class WL {
 		if(isset($_GET['echostr']))
 			$this->valid();//第一次验证
 
+		$postStr = (isset($GLOBALS["HTTP_RAW_POST_DATA"]))?$GLOBALS["HTTP_RAW_POST_DATA"]:'';
+		if($_POST["test"]){
+			$postStr = @$_POST["HTTP_RAW_POST_DATA"];
+		}
+		//$postStr = unicode_encode($postStr);
+		
+		if(isset($_GET['token'])){
+			if($_GET['signature'] and $_GET['timestamp'] and $_GET['nonce']){
+				include_once( 'wxlog-functions.php' );
+				//wxlog(date("Y-m-d").'.txt','GET:'.var_export($_GET, TRUE));
+				$url = 'http://'.$_SERVER['HTTP_HOST'].'/?'.TOKEN.'&signature='.$_GET['signature'].'&timestamp='.$_GET['timestamp'].'&nonce='.$_GET['nonce'];
+				$content = wxlog_get_xml($url,$postStr);
+				exit($content);
+			}
+		}
+		
 		if(get_option( 'wxlog_txt_log' )){
 			$upload_dir = wp_upload_dir();
 			$dir = $upload_dir['basedir'].'/wxlog_logs/';
@@ -27,13 +41,7 @@ class WL {
 			wxlog($dir.date("Y-m-d").'.txt','GET:'.var_export($_GET, TRUE));
 			wxlog($dir.date("Y-m-d").'.txt','HTTP_RAW_POST_DATA:'.var_export(@$GLOBALS["HTTP_RAW_POST_DATA"], TRUE));		
 		}
-			
 		
-		$postStr = (isset($GLOBALS["HTTP_RAW_POST_DATA"]))?$GLOBALS["HTTP_RAW_POST_DATA"]:'';
-		if($_POST["test"]){
-			$postStr = @$_POST["HTTP_RAW_POST_DATA"];
-		}
-		//$postStr = unicode_encode($postStr);
 		if (!empty($postStr) and $this->checkSignature()){
 			$postArray = wxlog_xml_to_array($postStr);
 			$this->wxlog_log_id = $this->insert_wxlog_log($postArray,$postStr,$reply);
