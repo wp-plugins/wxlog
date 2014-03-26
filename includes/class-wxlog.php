@@ -1,9 +1,13 @@
 <?php
 
-if(!isset($_GET['echostr']))
+if(isset($_GET['echostr'])){
+	if(isset($_GET['token'])){
+		define( "TOKEN", $_GET['token'] );
+		//http://www.phplog.com/wp-content/plugins/wxlog/includes/class-wxlog.php?token=wxlog
+	}
+}else{
 	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-//define( "TOKEN", 'wxlog' );
+}
 
 class WL {
 
