@@ -11,13 +11,14 @@ class WXLOG_Custom_reply_edit {
 		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `title`  `title` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
 		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `image_url`  `image_url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
 		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `url`  `url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
-		$wpdb->query("ALTER TABLE  `".$wpdb->prefix."wxlog_custom_reply` ADD  `mode` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `msgtype`");	
+		$wpdb->query("ALTER TABLE  `".$wpdb->prefix."wxlog_custom_reply` ADD  `mode` TINYINT( 1 ) NOT NULL DEFAULT  '0' AFTER  `msgtype`");	
 
 		$id = intval($_GET['edit']);
 		if($_POST){
 			$data = array( 
 				'keyword' => $_POST['keyword'], 
 				'msgtype' => $_POST['msgtype'], 
+				'mode' => $_POST['mode'], 				
 				'title' => implode('|phplogcom|',$_POST['title']), 
 				'url' => implode('|phplogcom|',$_POST['url']), 
 				'image_url' => implode('|phplogcom|',$_POST['image_url']), 
@@ -29,7 +30,7 @@ class WXLOG_Custom_reply_edit {
 				$data['url'] = $_POST['music_url'];
 				$data['image_url'] = $_POST['music_image_url'];
 			}
-			$data_format = array( '%s', '%s', '%s', '%s', '%s', '%s','%d' );
+			$data_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s','%d' );
 			if($id>0){
 				$wpdb->update( $wpdb->wxlog_custom_reply, $data, array( 'ID' => $id ), $data_format, array( '%d' ) );
 			}else{
