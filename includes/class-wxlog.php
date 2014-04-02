@@ -60,7 +60,8 @@ class WL {
 				'content'           => $data['Content'],
 				
 				'signature'         => $_GET['signature'],
-				'timestamp'         => date("Y-m-d H:i:s",$_GET['timestamp']),
+				'timestamp'         => current_time( 'mysql' ),
+
 				'nonce'             => $_GET['nonce'],
 				
 				'user_id'           => 1,
@@ -106,8 +107,8 @@ class WL {
     public function responseMsg($postArray,$postStr){
 		global $wpdb;
 		
-		if(empty($postArray['Content'])){
-			return;
+		if(empty($postArray['Content']) and $postArray['Content']!==0){
+			//return;
 		}
 		$postArray['Content'] = strtolower($postArray['Content']);
 
@@ -129,11 +130,19 @@ class WL {
 		}
 		
 		//调用自定义回复数据
-		$custom_reply_array = $wpdb->get_results( "SELECT ID,keyword FROM {$wpdb->wxlog_custom_reply} where status = 2" );
+		$custom_reply_array = $wpdb->get_results( "SELECT ID,keyword,mode FROM {$wpdb->wxlog_custom_reply} where status = 2" );
 		foreach($custom_reply_array as $key=>$value){
-			if(in_array($postArray['Content'],explode(',',str_replace('，',',',$value->keyword)))){
-				$custom_reply = $wpdb->get_row( "SELECT * FROM {$wpdb->wxlog_custom_reply} where ID = {$value->ID}" );
-				break;
+			$keyword_arr = explode(',',str_replace('，',',',$value->keyword));
+			if($value->mode==1){
+				if(preg_match_all("/(".implode('|',$keyword_arr).")/i",$postArray['Content'],$keyarr)){
+					$custom_reply = $wpdb->get_row( "SELECT * FROM {$wpdb->wxlog_custom_reply} where ID = {$value->ID}" );
+					break;
+				}
+			}else{
+				if(in_array($postArray['Content'],$keyword_arr)){
+					$custom_reply = $wpdb->get_row( "SELECT * FROM {$wpdb->wxlog_custom_reply} where ID = {$value->ID}" );
+					break;
+				}
 			}
 		}//d($custom_reply);
 		if($custom_reply){
@@ -272,6 +281,9 @@ class WL {
 
 	//查询数据库
 	public function get_posts($keyword,$query_array=''){
+		if(empty($keyword)){
+			return;
+		}
 		$post_max = ( $wxlog_post_max = get_option( 'wxlog_post_max' ) ) ? $wxlog_post_max : '5';
 		if($query_array){
 			
@@ -307,6 +319,17 @@ class WL {
 			if($post_type){
 				$query_array['post_type'] = explode(',',$post_type);
 			}
+			
+			if(!$query_array['order']){
+				$query_array['orderby'] = 'modified';
+				$query_array['order'] = 'DESC';
+			}
+			
+			$tags = explode('@',$keyword);					
+			if($tags[1]){
+				$query_array['tag'] = $tags[1];
+				$query_array['s'] = $tags[0];
+			}
 		}
 		
 		$query = new WP_Query($query_array);
@@ -327,6 +350,7 @@ class WL {
 				$i++;
 			}
 		}
+		//$contentArr[1]['title'] .= $contentArr[1]['title'].$query_array['order'].'test';
 		return $contentArr;
 	}
 
@@ -392,7 +416,7 @@ class WL {
 		$textTpl = "<xml>
 <ToUserName><![CDATA[".$toUsername."]]></ToUserName>
 <FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
+<CreateTime>".current_time( 'timestamp' )."</CreateTime>
 <MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[%s]]></Content>
 <FuncFlag>0</FuncFlag>
@@ -405,7 +429,7 @@ class WL {
 		$imageTpl = "<xml>
 <ToUserName><![CDATA[".$toUsername."]]></ToUserName>
 <FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
+<CreateTime>".current_time( 'timestamp' )."</CreateTime>
 <MsgType><![CDATA[image]]></MsgType>
 <Image>
 <PicUrl><![CDATA[".$contentArr['PicUrl']."]]></PicUrl>
@@ -434,7 +458,7 @@ class WL {
 		$musicTpl = "<xml>
 <ToUserName><![CDATA[".$toUsername."]]></ToUserName>
 <FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
+<CreateTime>".current_time( 'timestamp' )."</CreateTime>
 <MsgType><![CDATA[music]]></MsgType>
 <Music>
 <HQMusicUrl><![CDATA[".$contentArr['image_url']."]]></HQMusicUrl>
@@ -470,7 +494,7 @@ class WL {
 		$newsTpl = "<xml>
 <ToUserName><![CDATA[".$toUsername."]]></ToUserName>
 <FromUserName><![CDATA[".$fromUsername."]]></FromUserName>
-<CreateTime>".time()."</CreateTime>
+<CreateTime>".current_time( 'timestamp' )."</CreateTime>
 <MsgType><![CDATA[news]]></MsgType>
 <ArticleCount>%d</ArticleCount>
 <Articles>

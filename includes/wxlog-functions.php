@@ -55,7 +55,7 @@ if(!function_exists('wxlog_qqface')){
 
 if(!function_exists('wxlog_make_signature')){
 	function wxlog_make_signature() {
-        $timestamp = intval(time()); 
+        $timestamp = current_time( 'timestamp' ); 
         $nonce = intval($timestamp+3600*24*7); 
         $token = TOKEN; 
         $tmpArr = array($token, $timestamp, $nonce);//print_r($tmpArr);
