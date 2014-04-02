@@ -53,7 +53,7 @@ class WXLOG_Test_preview {
   <div id="chat_chatmsglist" class="chatContent" ctrl="1" style="position: absolute; ">
     <div class="chatItem me" un="item_1390543792332">
       <div class="time"> <span class="timeBg left"></span>
-        <?=date('Y-m-d H:i:s',$_GET['timestamp']+3600*8)?>
+        <?=date('Y-m-d H:i:s',$_GET['timestamp'])?>
         <span class="timeBg right"></span> </div>
       <div class="chatItemContent"> <img class="avatar" src="/wp-content/plugins/wxlog/includes/admin/images/man.jpg" onerror="reLoadImg(this)" un="avatar_phplog" title="PHP日志" click="showProfile" username="phplog.com">
         <div class="cloud cloudText" un="cloud_1020740958" msgid="1020740958">

@@ -8,9 +8,10 @@ class WXLOG_Custom_reply_edit {
 	//关于页面内容
 	public function edit_page() {
 		global $wpdb;
-		$wpdb->query('ALTER TABLE  `wp_wxlog_custom_reply` CHANGE  `title`  `title` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
-		$wpdb->query('ALTER TABLE  `wp_wxlog_custom_reply` CHANGE  `image_url`  `image_url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
-		$wpdb->query('ALTER TABLE  `wp_wxlog_custom_reply` CHANGE  `url`  `url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `title`  `title` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `image_url`  `image_url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `url`  `url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query("ALTER TABLE  `".$wpdb->prefix."wxlog_custom_reply` ADD  `mode` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `msgtype`");	
 
 		$id = intval($_GET['edit']);
 		if($_POST){
@@ -71,7 +72,17 @@ class WXLOG_Custom_reply_edit {
             </select>
             </td>
             </tr>
- 
+            
+            <tr valign="top">
+            <th scope="row"><label for="default_role">区配方式</label></th>
+            <td>
+            <select name="mode" id="mode">
+                <option<?php if($custom_reply->mode=='0') echo ' selected="selected"';?> value="0">精准区配</option>
+                <option<?php if($custom_reply->mode=='1') echo ' selected="selected"';?> value="1">模糊区配</option>
+            </select>
+            </td>
+            </tr>            
+            
             <tr valign="top" class="set-news"<?php if($custom_reply->msgtype!='news') echo ' style="display:none;"';?>><th scope="row"><span class="set-news">图文内容</span></th>
             <td id="wxlog_news_list"><input type="button" value=" 增加图文 " onclick="add_wxlog_news();">
 

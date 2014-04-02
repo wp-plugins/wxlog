@@ -70,7 +70,7 @@ class WXLOG_Log extends WP_List_Table {
 				return $status;
 			break;
 			case 'timestamp' :
-				return '<time title="' . date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime($item->timestamp)+3600*8 ) . '">' . sprintf( '%s 前', human_time_diff( strtotime($item->timestamp)+3600*8, current_time( 'timestamp' ) ) ) . '</time>';
+				return '<time title="' . date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime($item->timestamp) ) . '">' . sprintf( '%s 前', human_time_diff( strtotime($item->timestamp), current_time( 'timestamp' ) ) ) . '</time>';
 			break;
 			case 'title' :
 				if($item->msgtype=='image'){

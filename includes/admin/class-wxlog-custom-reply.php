@@ -59,7 +59,7 @@ class WXLOG_Custom_reply extends WP_List_Table {
 				return $item->content;
 			break;		
 			case 'timestamp' :
-				return '<time title="' . date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime($item->timestamp)+3600*8 ) . '">' . sprintf( '%s 前', human_time_diff( strtotime($item->timestamp)+3600*8, current_time( 'timestamp' ) ) ) . '</time>';
+				return '<time title="' . date_i18n( get_option( 'date_format' ) . ' @ ' . get_option( 'time_format' ), strtotime($item->timestamp) ) . '">' . sprintf( '%s 前', human_time_diff( strtotime($item->timestamp), current_time( 'timestamp' ) ) ) . '</time>';
 			break;
 			case 'operating' :
 				return '<a href="?page=wxlog_custom_reply&edit='.$item->ID.'">编辑</a> <a onClick="return confirm(\'您确定要删除么\')" href="?page=wxlog_custom_reply&del='.$item->ID.'">删除</a>';

@@ -26,6 +26,8 @@ WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_b
 微信日志网址：<a href="http://www.phplog.com/wxlog/" target="_blank">http://www.phplog.com/wxlog/</a>  
 功能提议：<a href="http://www.phplog.com/proposal/" target="_blank">http://www.phplog.com/proposal/</a>        
 微信公众平台：<a href="http://mp.weixin.qq.com/" target="_blank">http://mp.weixin.qq.com/</a>
+常见问题：<a href="http://www.phplog.com/detail/415.html" target="_blank">http://www.phplog.com/detail/415.html</a>
+子插件开发教程：<a href="http://www.phplog.com/detail/355.html" target="_blank">http://www.phplog.com/detail/355.html</a>
 
 <b>回复内容优先级</b>
 1 黑名单过滤
