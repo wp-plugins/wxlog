@@ -21,6 +21,7 @@ class WL {
 		if($_POST["test"]){
 			$postStr = @$_POST["HTTP_RAW_POST_DATA"];
 		}
+		//$xml = file_get_contents('php://input');
 		//$postStr = unicode_encode($postStr);
 		
 		if(isset($_GET['token'])){
@@ -43,13 +44,14 @@ class WL {
 		}
 		
 		if (!empty($postStr) and $this->checkSignature()){
-			$postArray = wxlog_xml_to_array($postStr);
-			$this->wxlog_log_id = $this->insert_wxlog_log($postArray,$postStr,$reply);
-			$this->responseMsg($postArray,$postStr);
+			$wpdb->postStr = $postStr;
+			$wpdb->postArray = wxlog_xml_to_array($postStr);
+			$this->wxlog_log_id = $this->insert_wxlog_log($wpdb->postArray,$wpdb->postStr);
+			$this->responseMsg($wpdb->postArray,$wpdb->postStr);
 		}
 	}
 
-    public function insert_wxlog_log($data,$message='',$reply=''){
+    public function insert_wxlog_log($data,$message=''){
 		global $wpdb;
 		
 		$wpdb->insert(
@@ -69,7 +71,7 @@ class WL {
 				'user_agent'        => $this->get_user_ua(),
 
 				'message'           => $message,
-				'reply'             => $reply,
+				'reply'             => '',
 				'status'            => 0,
 			),
 			array(

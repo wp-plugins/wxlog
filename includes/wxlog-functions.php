@@ -211,11 +211,6 @@ if(!function_exists('get_post_wxlog_thumb')){
 }
 
 
-
-
-
-
-
 if(!function_exists('get_wxlog_plugin_data')){
 
 	//获取插件数据
@@ -324,6 +319,9 @@ if(!function_exists('get_wxlog_plugins')){
 if(!function_exists('is_wxlog_plugin')){
 	//判断是否为WWY插件
 	function is_wxlog_plugin( $plugin ) {
+		if(in_array($plugin['ClassName'],array('wxlog_baiyin','wxlog_weather','wxlog_location','wxlog_mobile','wxlog_stock','wxlog_baike','wxlog_domain','wxlog_caipiao','wxlog_shenfenzheng','wxlog_bus','wxlog_train','wxlog_chouqian','wxlog_ip','wxlog_anquanqi','wxlog_ip','wxlog_fanyi'))){
+			//return false;
+		}
 		if($plugin['ClassName']){
 			return true;
 		}else{
