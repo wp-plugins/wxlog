@@ -21,21 +21,21 @@ class WXLOG_Settings {
 							'std' 		=> '',//初始值
 							'placeholder'	=> '请输入Token',//背景提示
 							'label' 	=> '微信 Token',
-							'desc'		=> sprintf( '微信公众平台 <code>%s</code>', 'http://mp.weixin.qq.com/' )
+							'desc'		=> sprintf( '不知道怎么填写 <code>%s</code>', '<a target="_blank" href="http://www.phplog.com/detail/415.html#2">点我</a>' )
 						),
 						array(
 							'name' 		=> 'wxlog_AppId',
 							'std' 		=> '',//初始值
 							'placeholder'	=> '请输入AppId',//背景提示
 							'label' 	=> '微信 AppId',
-							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单'
+							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单 <code><a target="_blank" href="http://www.phplog.com/detail/415.html#3">帮助</a></code>'
 						),
 						array(
 							'name' 		=> 'wxlog_AppSecret',
 							'std' 		=> '',//初始值
 							'placeholder'	=> '请输入AppSecret',//背景提示
 							'label' 	=> '微信 AppSecret',
-							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单'
+							'desc'		=> '使用微信高级接口必须填写，如设置自定义菜单 <code><a target="_blank" href="http://www.phplog.com/detail/415.html#3">帮助</a></code>'
 						),	
 					),
 				),
@@ -53,12 +53,14 @@ class WXLOG_Settings {
 							'name' 		=> 'wxlog_blacklist_message_custom',
 							'std' 		=> '您已经被管理员列入黑名单',
 							'label' 	=> '黑名单回复内容',
-							'desc'		=> '如果为空将不回复内容，也不会继续获取其他的内容'
+							'desc'		=> '如果为空将不回复内容，也不会继续获取其他的内容',
+							'type' 			=> 'textarea'
 						),
 						array(
 							'name' 		=> 'wxlog_default_content',
 							'std' 		=> '欢迎关注我的微信日志。\r\nhttp://www.phplog.com/wxlog',
-							'label' 	=> '默认回复内容'
+							'label' 	=> '默认回复内容',
+							'type' 			=> 'textarea'
 						),						
 					),
 				),

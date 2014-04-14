@@ -145,7 +145,15 @@ class WXLOG_Admin {
 			$WXLOG_Plugins_Lists = new WXLOG_Plugins_Lists();
 			$WXLOG_Plugins_Lists->prepare_items();
 			?>
+            
+            
+            
+            
+            
 <div class="wrap">
+
+<?php if(!function_exists('file_get_contents')){?>  <div class="update-nag">您的服务器不支持 file_get_contents 函数</div> <?php }?>           
+<?php if(!fsockopen("www.phplog.com", 80, $errno, $errstr, 30)) {?>  <div class="update-nag">连接官方插件服务器失败，请检查您的服务器的DNS</div> <?php }?>           
   <div id="icon-edit" class="icon32 icon32-posts-wxlog_plugins_lists"><br/></div>
   <h2>官方插件功能</h2>
   <br/>

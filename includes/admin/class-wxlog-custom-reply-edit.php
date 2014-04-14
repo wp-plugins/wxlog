@@ -8,9 +8,9 @@ class WXLOG_Custom_reply_edit {
 	//关于页面内容
 	public function edit_page() {
 		global $wpdb;
-		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `title`  `title` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
-		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `image_url`  `image_url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
-		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `url`  `url` VARCHAR( 1200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `title`  `title` VARCHAR( 2000 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `image_url`  `image_url` VARCHAR( 2000 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
+		$wpdb->query('ALTER TABLE  `'.$wpdb->prefix.'wxlog_custom_reply` CHANGE  `url`  `url` VARCHAR( 2000 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');	
 		$wpdb->query("ALTER TABLE  `".$wpdb->prefix."wxlog_custom_reply` ADD  `mode` TINYINT( 1 ) NOT NULL DEFAULT  '0' AFTER  `msgtype`");	
 
 		$id = intval($_GET['edit']);
@@ -151,7 +151,7 @@ class WXLOG_Custom_reply_edit {
                 if(wxlog_news_len>=10){
                     alert('最多只能增加10个图文！');return false;
                 }
-                if(wxlog_news_len==1){
+                if(wxlog_news_len==0){
 					document.getElementById('content').style.display='';
                 }else{
 					document.getElementById('content').style.display='none';
@@ -168,7 +168,7 @@ class WXLOG_Custom_reply_edit {
                     '<tr valign="top" class="set-news">'+
                     '<th style="width:50px; padding:2px;" scope="row">图片</th>'+
                     '<td style="padding:2px;">'+
-                    '<input name="image_url[]" type="text" id="image_url'+(wxlog_news_len+1)+'" value="" class="regular-text"><input onclick="del_wxlog_upload(\''+(wxlog_news_len+1)+'\');" type="button" value=" 上传 " class="button dp-upload-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+                    '<input name="image_url[]" type="text" id="image_url'+(wxlog_news_len+1)+'" value="" class="regular-text"><input onclick="wxlog_upload(\''+(wxlog_news_len+1)+'\');" type="button" value=" 上传 " class="button dp-upload-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
                     '<a href="javascript:del_wxlog_news(\'wxlog_news_'+(wxlog_news_len+1)+'\');">删除图文</a>'+
                     '</td>'+
                     '</tr>'+
@@ -177,7 +177,7 @@ class WXLOG_Custom_reply_edit {
             function del_wxlog_news(id){
                 var wxlog_news=jQuery(".wxlog_news_list");
                 var wxlog_news_len=wxlog_news.length;
-                if(wxlog_news_len==1){
+                if(wxlog_news_len==2){
 					document.getElementById('content').style.display='';
                 }else{
 					document.getElementById('content').style.display='none';
@@ -198,7 +198,7 @@ class WXLOG_Custom_reply_edit {
 		<?php
 		
 		  wp_enqueue_script('my-upload', get_bloginfo( 'stylesheet_directory' ) . '/js/upload.js'); 
-		  add_thickbox();//3.8版增加的函数等价于下面的两个函数
+		  add_thickbox();
 		  wp_enqueue_script('media-upload');
 		
 		 global $WXLOG; $WXLOG->add_inline_js("jQuery('#msgtype').change(function(){

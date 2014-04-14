@@ -250,7 +250,11 @@ class WXLOG_Custom_menu {
                               <label>二级名称：</label>
                               <input names="sub_button[][name]" type="text" value="<?=$val->name?>" class="ts" />
                               <label>关键字：</label>
+								<?php  if($val->url){?>
+                              <input names="sub_button[][key]" type="text" value="<?=$val->url?>" class="ts" />
+                                <?php }else{?>
                               <input names="sub_button[][key]" type="text" value="<?=$val->key?>" class="ts" />
+                                <?php }?>
                               <a onclick="del_menu('m_<?=$key+1?>_<?=$k+1?>');" href="javascript:vod(0);">删除</a>
                             </h4>
                           </div>

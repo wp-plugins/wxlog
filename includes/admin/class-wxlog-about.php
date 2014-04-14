@@ -16,10 +16,10 @@ class WXLOG_About {
 		?>
 		<div class="wrap">
             <h2>使用帮助 <a href="?page=wxlog_setting" class="add-new-h2">配置微信日志</a></h2>
-            <div><pre>
+            <div>
  
 <b>官方最新消息</b>
-<div id="wxlog_news"></div>
+<div id="wxlog_news"></div><pre>
 <b>相关网址 </b>        
 WP插件网址：<a href="http://wordpress.org/plugins/wxlog/" target="_blank">http://wordpress.org/plugins/wxlog/</a>
 WP插件SVN网址：<a href="http://plugins.svn.wordpress.org/wxlog/" target="_blank">http://plugins.svn.wordpress.org/wxlog/</a>

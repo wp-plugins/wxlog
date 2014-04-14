@@ -116,7 +116,9 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 	//获取记录
 	function prepare_items() {
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
-		$this->items = json_decode(file_get_contents('http://www.phplog.com/?wxlog_plugins'));
+		if(fsockopen("www.phplog.com", 80, $errno, $errstr, 30)) {
+        	$this->items = json_decode(@file_get_contents('http://www.phplog.com/?wxlog_plugins'));
+		}
 		$total_items = count( $this->items );
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
