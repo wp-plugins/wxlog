@@ -60,6 +60,7 @@ class WXLOG_Settings {
 							'name' 		=> 'wxlog_default_content',
 							'std' 		=> '欢迎关注我的微信日志。\r\nhttp://www.phplog.com/wxlog',
 							'label' 	=> '默认回复内容',
+							'desc'		=> '技巧：如果内容为default可在自定义回复中添加一个关键字为default的项目来关联自定义回复',
 							'type' 			=> 'textarea'
 						),						
 					),

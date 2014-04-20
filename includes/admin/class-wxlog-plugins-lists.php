@@ -88,8 +88,7 @@ class WXLOG_Plugins_Lists extends WP_List_Table {
 			'pluginname'     => '插件名称',
 			'content'     => '描述',
 			'msgtype'     => '回复类型',
-			//'price'      => '价格',
-			'status'   => '状态',
+			'status'   => '开发状态',
 			'timestamp'   => '时间',
 		);
 		return $columns;

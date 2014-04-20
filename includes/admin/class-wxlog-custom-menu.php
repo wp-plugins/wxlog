@@ -6,8 +6,8 @@ class WXLOG_Custom_menu {
 
 	public function __construct() {
 		
-		if($_POST['button']){
-			$button = $this->make_menu($_POST['button']);
+		if($_POST['button']){//print_r($_POST['button']);//die;
+			$button = $this->make_menu($_POST['button']);//echo $button;//die;
 			$access_token = $this->access_token();
 			$_POST['wxlog_custom_menu'] = '';
 			if($access_token){
@@ -41,10 +41,11 @@ class WXLOG_Custom_menu {
 				$data.='"sub_button":[';
 			}else{
 				if($key==(count($arr)-1)){
-					$data.='"type":"click","key":"'.$value['key'].'"';
+					//$data.='"type":"click","key":"'.$value['key'].'"';
 				}else{
-					$data.='"type":"click","key":"'.$value['key'].'",';
+					//$data.='"type":"click","key":"'.$value['key'].'"';
 				}
+				$data.='"type":"click","key":"'.$value['key'].'"';
 			}
 			foreach($value['sub_button'] as $k=>$v){
 				if($k==(count($value['sub_button'])-1)){
@@ -228,7 +229,7 @@ class WXLOG_Custom_menu {
                   <div class="handlediv" title="点击以切换"><br /></div>
                   <h3 class='hndle'> <span>一级名称：</span>
                     <input names="button[][name]" type="text" value="<?=$value->name?>" class="widefatzj" />
-                    <span>关键字：<span>
+                    <span>关键字（TEXT/URL）：<span>
                         <?php  if($value->url){?>
                       <input names="button[][key]" type="text" value="<?=$value->url?>" class="widefatzj" />
                         <?php }else{?>
@@ -249,7 +250,7 @@ class WXLOG_Custom_menu {
                             <h4>
                               <label>二级名称：</label>
                               <input names="sub_button[][name]" type="text" value="<?=$val->name?>" class="ts" />
-                              <label>关键字：</label>
+                              <label>关键字（TEXT/URL）：</label>
 								<?php  if($val->url){?>
                               <input names="sub_button[][key]" type="text" value="<?=$val->url?>" class="ts" />
                                 <?php }else{?>
@@ -346,7 +347,7 @@ class WXLOG_Custom_menu {
                                   '<h4>'+
                                       '<label>二级名称：</label>'+
                                       ' <input names="sub_button[][name]" type="text" value="" class="ts" />'+
-                                      ' <label>关键字：</label>'+
+                                      ' <label>关键字（TEXT/URL）：</label>'+
                                       ' <input names="sub_button[][key]" type="text" value="" class="ts" />'+
                                       ' <a onclick="del_menu(\'m_'+i+'_'+(len+1)+'\');" href="javascript:vod(0);">删除</a>'+
                                   '</h4>'+
@@ -366,7 +367,7 @@ class WXLOG_Custom_menu {
                   '<div class="handlediv" title="点击以切换"><br /></div>'+
                   '<h3 class="hndle"> <span>一级名称：</span>'+
                     '<input names="button[][name]" type="text" value="" class="widefatzj" />'+
-                    '<span>关键字：<span>'+
+                    '<span>关键字（TEXT/URL）：<span>'+
                     '<input names="button[][key]" type="text" value="" class="widefatzj" />'+
                     ' <a href="javascript:del_menu(\'m_'+(len+1)+'\');">删除</a> | <a href="javascript:add_menu2(\''+(len+1)+'\');">新增子菜单</a>'+
                   '</h3>'+

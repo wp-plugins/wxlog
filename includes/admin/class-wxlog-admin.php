@@ -43,6 +43,7 @@ class WXLOG_Admin {
 		add_menu_page('最新消息', '微信日志', 'administrator', 'wxlog_log', array( $this, 'log_viewer' ),$m_icon, 6);
 		add_submenu_page( 'wxlog_log', '自定义回复', '自定义回复', 'administrator', 'wxlog_custom_reply', array( $this, 'custom_viewer' ) );
 		add_submenu_page( 'wxlog_log', '官方插件功能', '官方插件功能', 'administrator', 'wxlog_plugins_lists', array( $this, 'plugins_viewer' ) );
+		add_submenu_page( 'wxlog_log', '高级插件', '高级插件', 'administrator', 'wxlog_advanced_plugins_lists', array( $this, 'advanced_plugins_viewer' ) );
 	}
 
 
@@ -130,10 +131,6 @@ class WXLOG_Admin {
 		global $WXLOG;
 		parse_str($_SERVER['QUERY_STRING'], $queryVars);
 		if(isset($queryVars['edit'])){
-	
-			require_once( 'class-wxlog-plugins-edit.php' );
-			$WXLOG_Custom_reply_edit = new WXLOG_Custom_reply_edit();
-			$WXLOG_Custom_reply_edit->edit_page();
 
 		}else{
 		
@@ -146,26 +143,66 @@ class WXLOG_Admin {
 			$WXLOG_Plugins_Lists->prepare_items();
 			?>
             
+            <div class="wrap">
             
-            
-            
-            
-<div class="wrap">
-
-<?php if(!function_exists('file_get_contents')){?>  <div class="update-nag">您的服务器不支持 file_get_contents 函数</div> <?php }?>           
-<?php if(!fsockopen("www.phplog.com", 80, $errno, $errstr, 30)) {?>  <div class="update-nag">连接官方插件服务器失败，请检查您的服务器的DNS</div> <?php }?>           
-  <div id="icon-edit" class="icon32 icon32-posts-wxlog_plugins_lists"><br/></div>
-  <h2>官方插件功能</h2>
-  <br/>
-  
-  <form id="wxlog_plugins_lists" action="" method="get">
-    <?php $WXLOG_Plugins_Lists->display() ?>
-  </form>
-</div>
-<?php
+            <?php if(!function_exists('file_get_contents')){?>  <div class="update-nag">您的服务器不支持 file_get_contents 函数</div> <?php }?>           
+            <?php if(!fsockopen("www.phplog.com", 80, $errno, $errstr, 30)) {?>  <div class="update-nag">连接官方插件服务器失败，请检查您的服务器的DNS</div> <?php }?>           
+              <div id="icon-edit" class="icon32 icon32-posts-wxlog_plugins_lists"><br/></div>
+              <h2>官方插件功能</h2>
+              <br/>
+              
+              <form id="wxlog_plugins_lists" action="" method="get">
+                <?php $WXLOG_Plugins_Lists->display() ?>
+              </form>
+            </div>
+            <?php
 		}	
 		
 	}
+
+
+
+	/**
+	 * advanced_plugins_viewer function.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function advanced_plugins_viewer() {
+		global $WXLOG;
+		parse_str($_SERVER['QUERY_STRING'], $queryVars);
+		if(isset($queryVars['edit'])){
+
+		}else{
+		
+			if ( ! class_exists( 'WP_List_Table' ) )
+				require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+	
+			require_once( 'class-wxlog-advanced-plugins-lists.php' );
+	
+			$WXLOG_Advanced_Plugins_Lists = new WXLOG_Advanced_Plugins_Lists();
+			$WXLOG_Advanced_Plugins_Lists->prepare_items();
+			?>
+            
+            <div class="wrap">
+            
+            <?php if(!function_exists('file_get_contents')){?>  <div class="update-nag">您的服务器不支持 file_get_contents 函数</div> <?php }?>           
+            <?php if(!fsockopen("www.phplog.com", 80, $errno, $errstr, 30)) {?>  <div class="update-nag">连接高级插件服务器失败，请检查您的服务器的DNS</div> <?php }?>           
+              <div id="icon-edit" class="icon32 icon32-posts-wxlog_advanced_plugins_lists"><br/></div>
+              <h2>高级插件</h2>
+              <br/>
+              
+              <form id="wxlog_advanced_plugins_lists" action="" method="get">
+                <?php $WXLOG_Advanced_Plugins_Lists->display() ?>
+              </form>
+            </div>
+            <?php
+		}	
+		
+	}
+
+
+
 
 
 
