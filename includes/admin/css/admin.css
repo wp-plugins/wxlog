@@ -49,18 +49,29 @@
 	}
 }
 
+#wxlog_advanced_plugins_lists .column-pluginname{width:10em}
+#wxlog_advanced_plugins_lists .column-timestamp{width:6em}
+#wxlog_advanced_plugins_lists .column-msgtype{width:4em}
+#wxlog_advanced_plugins_lists .column-price{width:4em}
+#wxlog_advanced_plugins_lists .column-version{width:2em}
+#wxlog_advanced_plugins_lists .column-status{width:8em;vertical-align:middle;text-align:center}
+#wxlog_advanced_plugins_lists .column-status span{color:#fff;font-weight:400;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;height:16px;line-height:16px;width:16px;display:inline-block}
+#wxlog_advanced_plugins_lists .column-status .completed{background-color:#1c769b}
+#wxlog_advanced_plugins_lists .column-status .development{width: 100px;background-color:#74a721}
+#wxlog_advanced_plugins_lists .column-status .updated{width: 100px;background-color:#F90}
+
 
 
 #wxlog_plugins_lists .column-pluginname{width:10em}
 #wxlog_plugins_lists .column-timestamp{width:6em}
-#wxlog_plugins_lists .column-msgtype{width:6em}
+#wxlog_plugins_lists .column-msgtype{width:4em}
 #wxlog_plugins_lists .column-status{width:4em;vertical-align:middle;text-align:center}
 #wxlog_plugins_lists .column-status span{color:#fff;font-weight:400;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;height:16px;line-height:16px;width:16px;display:inline-block}
 #wxlog_plugins_lists .column-status .completed{background-color:#1c769b}
 #wxlog_plugins_lists .column-status .development{width: 60px;background-color:#74a721}
 
 
-
+#wxlog_custom_reply .column-keyword{width:10em}
 #wxlog_custom_reply .column-operating{width:4em}
 #wxlog_custom_reply .column-msgtype{width:6em}
 #wxlog_custom_reply .column-timestamp{width:6em}
