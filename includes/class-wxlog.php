@@ -306,7 +306,7 @@ class WL {
 					break;
 				case get_option( 'wxlog_post_hot' ) :
 					if(get_option( 'wxlog_post_hot_field_name' )){
-						$query_array['meta_key'] = 'views';//访问统计的字段名
+						$query_array['meta_key'] = get_option( 'wxlog_post_hot_field_name' );//访问统计的字段名
 						$query_array['orderby'] = 'meta_value_num';
 						$query_array['order'] = 'DESC';
 						break;
