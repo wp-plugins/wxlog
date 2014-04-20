@@ -148,42 +148,7 @@ class WL {
 			}
 		}//d($custom_reply);
 		if($custom_reply){
-			if($custom_reply->msgtype=='text'){
-				$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], stripslashes($custom_reply->content));
-			}elseif($custom_reply->msgtype=='news'){
-				$contentArr = array();
-				$wxlog_news_list_title = explode('|phplogcom|',stripslashes($custom_reply->title));
-				$wxlog_news_list_url = explode('|phplogcom|',stripslashes($custom_reply->url));
-				$wxlog_news_list_image_url = explode('|phplogcom|',stripslashes($custom_reply->image_url));
-				$wxlog_news_list_description = explode('|phplogcom|',stripslashes($custom_reply->description));
-				foreach($wxlog_news_list_title as $key=>$value){
-					$contentArr[$key]['title'] =  $wxlog_news_list_title[$key];
-					if($key==0){
-						$contentArr[$key]['description'] =  $custom_reply->content;
-					}
-					$contentArr[$key]['image_url'] =  $wxlog_news_list_image_url[$key];
-					$contentArr[$key]['url'] =  $wxlog_news_list_url[$key];
-				}
-				$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
-			}elseif($custom_reply->msgtype=='music'){
-				$contentArr = array();
-				$contentArr['title'] =  $custom_reply->title;
-				$contentArr['description'] =  $custom_reply->content;
-				$contentArr['image_url'] =  $custom_reply->image_url;
-				$contentArr['url'] =  $custom_reply->url;
-				$resultStr = $this->reply_music($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
-			}elseif($custom_reply->msgtype=='post'){
-				$contentArr = $this->get_posts($custom_reply->title,$custom_reply->content);
-				if($contentArr){
-					if(is_array($contentArr)){
-						$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
-						if($resultStr){
-							$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
-							exit($resultStr);
-						}
-					}
-				}
-			}			
+			$resultStr = $this->get_custom_reply($postArray,$custom_reply);
 			if($resultStr){
 				$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
 				exit($resultStr);
@@ -273,13 +238,59 @@ class WL {
 		//默认的回复内容		
 		$contentStr = get_option( 'wxlog_default_content' );
 		if($contentStr){
-			$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $contentStr);
+			if($contentStr=='default'){
+				$custom_reply = $wpdb->get_row( "SELECT * FROM {$wpdb->wxlog_custom_reply} where keyword = 'default'" );
+				if($custom_reply){
+					$resultStr = $this->get_custom_reply($postArray,$custom_reply);
+				}				
+			}else{
+				$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $contentStr);
+			}
 		}
 		if($resultStr){
 			$wpdb->update( $wpdb->wxlog_log, array( 'reply' => $resultStr,'status' => 2 ), array( 'ID' => $this->wxlog_log_id ), array( '%s','%d' ), array( '%d' ) );
 			exit($resultStr);
 		}
     }
+
+
+	//自定义回复
+	public function get_custom_reply($postArray,$custom_reply){
+		$resultStr = '';
+		if($custom_reply->msgtype=='text'){
+			$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], stripslashes($custom_reply->content));
+		}elseif($custom_reply->msgtype=='news'){
+			$contentArr = array();
+			$wxlog_news_list_title = explode('|phplogcom|',stripslashes($custom_reply->title));
+			$wxlog_news_list_url = explode('|phplogcom|',stripslashes($custom_reply->url));
+			$wxlog_news_list_image_url = explode('|phplogcom|',stripslashes($custom_reply->image_url));
+			$wxlog_news_list_description = explode('|phplogcom|',stripslashes($custom_reply->description));
+			foreach($wxlog_news_list_title as $key=>$value){
+				$contentArr[$key]['title'] =  $wxlog_news_list_title[$key];
+				if($key==0){
+					$contentArr[$key]['description'] =  $custom_reply->content;
+				}
+				$contentArr[$key]['image_url'] =  $wxlog_news_list_image_url[$key];
+				$contentArr[$key]['url'] =  $wxlog_news_list_url[$key];
+			}
+			$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+		}elseif($custom_reply->msgtype=='music'){
+			$contentArr = array();
+			$contentArr['title'] =  $custom_reply->title;
+			$contentArr['description'] =  $custom_reply->content;
+			$contentArr['image_url'] =  $custom_reply->image_url;
+			$contentArr['url'] =  $custom_reply->url;
+			$resultStr = $this->reply_music($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+		}elseif($custom_reply->msgtype=='post'){
+			$contentArr = $this->get_posts($custom_reply->keyword,$custom_reply->content);
+			if($contentArr){
+				if(is_array($contentArr)){
+					$resultStr = $this->reply_news($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+				}
+			}
+		}
+		return 	$resultStr;	
+	}
 
 	//查询数据库
 	public function get_posts($keyword,$query_array=''){
