@@ -15,6 +15,12 @@ class WXLOG_Custom_menu {
 				//$con = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/delete?access_token='.$access_token);
 			 	$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
 				$con = $this->get_json($url,$button);
+			}else{
+				$ACCESS_TOKEN_yixi = json_decode(file_get_contents('https://api.yixin.im/cgi-bin/token?grant_type=client_credential&appid='.get_option('wxlog_AppId').'&secret='.get_option('wxlog_AppSecret')));
+				if($ACCESS_TOKEN_yixi->access_token){
+					$url = 'https://api.yixin.im/cgi-bin/menu/create?access_token'.$access_token;
+					$con = $this->get_json($url,$button);
+				}
 			}
 			//echo $button;
 			//echo '<pre>',print_r(json_decode($button));die;
