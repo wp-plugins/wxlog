@@ -17,12 +17,14 @@ class WXLOG_Custom_menu {
 				$con = $this->get_json($url,$button);
 			}else{
 				$ACCESS_TOKEN_yixi = json_decode(file_get_contents('https://api.yixin.im/cgi-bin/token?grant_type=client_credential&appid='.get_option('wxlog_AppId').'&secret='.get_option('wxlog_AppSecret')));
+				$access_token = $ACCESS_TOKEN_yixi->access_token;
 				if($ACCESS_TOKEN_yixi->access_token){
-					$url = 'https://api.yixin.im/cgi-bin/menu/create?access_token'.$access_token;
+					$url = 'https://api.yixin.im/cgi-bin/menu/create?access_token='.$access_token;
 					$con = $this->get_json($url,$button);
+					//****易信子菜单必须添加2个上以，否则会添加失败***//
 				}
 			}
-			//echo $button;
+			//echo $button;die;
 			//echo '<pre>',print_r(json_decode($button));die;
 			unset($_POST['button']);
 		}
@@ -123,6 +125,7 @@ class WXLOG_Custom_menu {
 		  return false;
 	   }else{
 		  // var_dump($tmpInfo);
+		  return $tmpInfo;
 		  return true;
 	   }
 	}
@@ -214,11 +217,24 @@ class WXLOG_Custom_menu {
         //初始化设置
         private function wxlog_custom_menu($menu) {
             $access_token = $this->access_token();
+			
             if($access_token){
                 $menu = file_get_contents('https://api.weixin.qq.com/cgi-bin/menu/get?access_token='.$access_token);
+			}else{
+				$ACCESS_TOKEN_yixi = json_decode(file_get_contents('https://api.yixin.im/cgi-bin/token?grant_type=client_credential&appid='.get_option('wxlog_AppId').'&secret='.get_option('wxlog_AppSecret')));
+				$access_token = $ACCESS_TOKEN_yixi->access_token;
+				if($ACCESS_TOKEN_yixi->access_token){
+                	$menu = file_get_contents('https://api.yixin.im/cgi-bin/menu/get?access_token='.$access_token);
+					$menu = stripslashes($menu);
+					$menu = str_replace('{"menu":"','{"menu":',$menu);
+					$menu = str_replace('}]}"}','}]}}',$menu);
+				}				
+			}			
+			
+            if($access_token){
 				$get_menu = json_decode($menu);
 				//echo '<pre>';print_r($get_menu->menu->button);
-				//echo '<pre>';print_r($_POST);
+				//echo '<pre>';print_r($menu);
     ?>
     
     <input type="button" value=" 增加一级菜单 " onClick="add_menu1();">

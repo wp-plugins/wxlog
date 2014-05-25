@@ -157,6 +157,18 @@ class WXLOG_Settings {
 							'type' 			=> 'text'
 						),
 						array(
+							'name' 		=> 'wxlog_api_type',
+							'std' 		=> '',
+							'placeholder'	=> '1',//初始值
+							'label' 	=> '接口类型',
+							'desc'		=> '',
+							'type'      => 'select',
+							'options'   => array(
+								'1'       => '微信标准接口（标准xml）',
+								'2'       => '文本接口（）',
+							)
+						),
+						array(
 							'name' 		=> 'wxlog_api_default',
 							'cb_label'  => '开启',
 							'std' 		=> '1',
