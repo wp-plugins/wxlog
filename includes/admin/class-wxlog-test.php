@@ -22,7 +22,7 @@ class WXLOG_Test {
 	//调试页面内容
 	public function wxlog_test_page() {
 		global $wpdb;
-		$signature_timestamp_nonce = wxlog_make_signature();
+		$signature_timestamp_nonce = wxlog_make_signature(TOKEN);
 		$wxlog_log = $wpdb->get_row("SELECT * FROM {$wpdb->wxlog_log} WHERE 1=1 order by ID asc");
 		$message = wxlog_xml_to_array($wxlog_log->message);//print_r($message); 
 		?>

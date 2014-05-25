@@ -128,9 +128,46 @@ class WXLOG_Settings {
 							'std' 		=> 'post,page',//初始值
 							'label' 	=> '按类型回复文章',
 							'desc'		=> '这里填写文章的类别名称，多个类别用英文,号隔开',
-						),													
-					)
-				),		
+						),
+						array(
+							'name' 		=> 'wxlog_post_search_title_only',
+							'cb_label'  => '开启',
+							'std' 		=> '1',
+							'label' 	=> '是否开启仅搜索标题',
+							'desc'		=> '仅搜索标题',
+							'type' 		=> 'checkbox'
+						),					)
+				),	
+				'api' => array('第三方接口',
+					array(
+						array(
+							'name' 		=> 'wxlog_api_url',
+							'std' 		=> '',//初始值
+							'label' 	=> '接口地址',
+							'placeholder' => '请输入接口地址',//背景提示
+							'desc'		=> '',
+							'type' 			=> 'text'
+						),
+						array(
+							'name' 		=> 'wxlog_api_token',
+							'std' 		=> '',
+							'label' 	=> '接口TOKEN',
+							'placeholder' => '请输入接口TOKEN',//背景提示
+							'desc'		=> '',
+							'type' 			=> 'text'
+						),
+						array(
+							'name' 		=> 'wxlog_api_default',
+							'cb_label'  => '开启',
+							'std' 		=> '1',
+							'label' 	=> '是否开启仅搜索标题',
+							'desc'		=> '如果微信日志没有回复，将自动调用第三方接口',
+							'type' 		=> 'checkbox'
+						),						
+					),
+				),				
+				
+					
 				'advanced' => array('高级',
 					array(
 						array(

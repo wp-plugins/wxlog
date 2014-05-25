@@ -130,7 +130,7 @@ var mydata = '<xml><ToUserName><![CDATA[<?=$message['ToUserName']?>]]></ToUserNa
 '<MsgId>1000000000000000000</MsgId>'+"\n"+
 '</xml>';
 
-	<?php $signature_timestamp_nonce = wxlog_make_signature();?>
+	<?php $signature_timestamp_nonce = wxlog_make_signature(TOKEN);?>
 	
 		window.location='admin.php?page=wxlog_test&preview=1&signature=<?=$signature_timestamp_nonce[0]?>&timestamp=<?=$signature_timestamp_nonce[1]?>&nonce=<?=$signature_timestamp_nonce[2]?>&HTTP_RAW_POST_DATA='+mydata;
 		
