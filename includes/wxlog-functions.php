@@ -54,10 +54,10 @@ if(!function_exists('wxlog_qqface')){
 
 
 if(!function_exists('wxlog_make_signature')){
-	function wxlog_make_signature() {
+	function wxlog_make_signature($TOKEN) {
         $timestamp = current_time( 'timestamp' ); 
         $nonce = intval($timestamp+3600*24*7); 
-        $token = TOKEN; 
+        $token = $TOKEN; 
         $tmpArr = array($token, $timestamp, $nonce);//print_r($tmpArr);
         sort($tmpArr,SORT_STRING);//print_r($tmpArr);
         $tmpStr = implode( $tmpArr );
@@ -359,6 +359,7 @@ if(!function_exists('wxlog_get_xml')){
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
+		//curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Linux; U; Android 2.3.6; zh-cn; GT-S5660 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 MicroMessenger/4.5.255');
 		$response = curl_exec($ch);
 		if(curl_errno($ch)){
 			print curl_error($ch);

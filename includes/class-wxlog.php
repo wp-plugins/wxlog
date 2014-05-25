@@ -24,6 +24,12 @@ class WL {
 		//$xml = file_get_contents('php://input');
 		//$postStr = unicode_encode($postStr);
 		
+		//只搜索标题
+		
+		if(get_option( 'wxlog_post_search_title_only' )==1){
+			add_filter( 'posts_search', array( $this, '__search_by_title_only' ), 10, 2 );
+		}
+		
 		if(isset($_GET['token'])){
 			if($_GET['signature'] and $_GET['timestamp'] and $_GET['nonce']){
 				include_once( 'wxlog-functions.php' );
@@ -49,6 +55,8 @@ class WL {
 			$this->wxlog_log_id = $this->insert_wxlog_log($wpdb->postArray,$wpdb->postStr);
 			$this->responseMsg($wpdb->postArray,$wpdb->postStr);
 		}
+		
+
 	}
 
     public function insert_wxlog_log($data,$message=''){
@@ -220,6 +228,13 @@ class WL {
 			}
 		}
 		
+		$wxlog_api_url = get_option( 'wxlog_api_url' );
+		$wxlog_api_token = get_option( 'wxlog_api_token' );
+		$wxlog_api_default = get_option( 'wxlog_api_default' );
+		if($wxlog_api_url and $wxlog_api_token and $wxlog_api_default){
+			exit(wxlog_get_xml($wxlog_api_url,$postStr));
+		}
+		
 		//是否开启小黄鸡，可以到高级里设置。
 		if(get_option( 'wxlog_simsimi' )){
 			$simsimi_keyword = get_option( 'wxlog_simsimi_keyword' );
@@ -292,6 +307,21 @@ class WL {
 		return 	$resultStr;	
 	}
 
+	function __search_by_title_only( $search, &$wp_query ) {
+		global $wpdb;
+		if ( empty($search) ) 
+			return $search;
+		$q =& $wp_query->query_vars; 
+		$n = !empty($q['exact']) ? '' : '%';
+		$term = esc_sql( like_escape( $q['s'] ) );
+		$search .= " AND ($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
+		if ( empty($q['sentence']) && count($q['search_terms']) > 1 && $q['search_terms'][0] != $q['s'] ) 
+			$search .= " OR ($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')"; 
+		//echo $search;		
+		return $search; 
+	} 
+
+
 	//查询数据库
 	public function get_posts($keyword,$query_array=''){
 		if(empty($keyword)){
@@ -345,7 +375,8 @@ class WL {
 			}
 		}
 		
-		$query = new WP_Query($query_array);
+		/*$query = new WP_Query($query_array);
+		
 		$contentArr = '';
 		$i = 0;
 		if($query->have_posts()){
@@ -362,7 +393,29 @@ class WL {
 				$contentArr[$i]['url'] = get_permalink();
 				$i++;
 			}
-		}
+		}*/
+
+		
+		$query = query_posts($query_array);
+		if ( have_posts() ) : while ( have_posts() ) : the_post();
+
+				global $post;
+				if($contentArr){
+					$contentArr[$i]['image_url'] = get_post_wxlog_thumb($post, array(80,80));
+				}else{
+					$contentArr[$i]['image_url'] = get_post_wxlog_thumb($post, array(640,320));
+				}
+				$contentArr[$i]['title'] = get_the_title();
+				$contentArr[$i]['description'] = get_post_wxlog_excerpts($post,150);
+				$contentArr[$i]['url'] = get_permalink();
+				$i++;
+
+		endwhile; else:
+
+		endif;
+		
+		wp_reset_query();
+		
 		//$contentArr[1]['title'] .= $contentArr[1]['title'].$query_array['order'].'test';
 		return $contentArr;
 	}
