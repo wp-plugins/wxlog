@@ -137,49 +137,7 @@ class WXLOG_Settings {
 							'desc'		=> '仅搜索标题',
 							'type' 		=> 'checkbox'
 						),					)
-				),	
-				'api' => array('第三方接口',
-					array(
-						array(
-							'name' 		=> 'wxlog_api_url',
-							'std' 		=> '',//初始值
-							'label' 	=> '接口地址',
-							'placeholder' => '请输入接口地址',//背景提示
-							'desc'		=> '',
-							'type' 			=> 'text'
-						),
-						array(
-							'name' 		=> 'wxlog_api_token',
-							'std' 		=> '',
-							'label' 	=> '接口TOKEN',
-							'placeholder' => '请输入接口TOKEN',//背景提示
-							'desc'		=> '',
-							'type' 			=> 'text'
-						),
-						array(
-							'name' 		=> 'wxlog_api_type',
-							'std' 		=> '',
-							'placeholder'	=> '1',//初始值
-							'label' 	=> '接口类型',
-							'desc'		=> '',
-							'type'      => 'select',
-							'options'   => array(
-								'1'       => '微信标准接口（标准xml）',
-								'2'       => '文本接口（）',
-							)
-						),
-						array(
-							'name' 		=> 'wxlog_api_default',
-							'cb_label'  => '开启',
-							'std' 		=> '1',
-							'label' 	=> '是否开启仅搜索标题',
-							'desc'		=> '如果微信日志没有回复，将自动调用第三方接口',
-							'type' 		=> 'checkbox'
-						),						
-					),
-				),				
-				
-					
+				),
 				'advanced' => array('高级',
 					array(
 						array(
