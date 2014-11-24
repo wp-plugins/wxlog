@@ -1,4 +1,4 @@
-=== 微信日志 ===
+ === 微信日志 ===
 Name: 微信日志 For Wordpress
 Contributors: zhangji
 Link: http://www.phplog.com/wxlog
@@ -55,6 +55,12 @@ License: GPLv3
 1、本插件是在Wordpress3.8基础上开发的。
 
 == Changelog ==
+
+= 1.1.4 =
+* 文章查询结果与网站前端的查询一致
+* 文章查询结果最后一条为More（更多）
+* 修复第三方接口BUG并移到自定义回复
+* 修复自定义回复（添加/编辑）回复类型选择的bug
 
 
 = 1.1.3 =
