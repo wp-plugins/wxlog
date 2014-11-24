@@ -30,6 +30,11 @@ class WXLOG_Custom_reply_edit {
 				$data['url'] = $_POST['music_url'];
 				$data['image_url'] = $_POST['music_image_url'];
 			}
+			if($_POST['msgtype']=='api'){
+				$data['title'] = $_POST['api_token'];
+				$data['url'] = $_POST['api_url'];
+				$data['image_url'] = $_POST['api_mode'];
+			}
 			$data_format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s','%d' );
 			if($id>0){
 				$wpdb->update( $wpdb->wxlog_custom_reply, $data, array( 'ID' => $id ), $data_format, array( '%d' ) );
@@ -70,6 +75,7 @@ class WXLOG_Custom_reply_edit {
                 <option<?php if($custom_reply->msgtype=='news') echo ' selected="selected"';?> value="news">图文消息</option>
                 <option<?php if($custom_reply->msgtype=='music') echo ' selected="selected"';?> value="music">音乐消息</option>
                 <option<?php if($custom_reply->msgtype=='post') echo ' selected="selected"';?> value="post">文章消息</option>
+                <option<?php if($custom_reply->msgtype=='api') echo ' selected="selected"';?> value="api">第三方接口</option> 
             </select>
             </td>
             </tr>
@@ -131,8 +137,34 @@ class WXLOG_Custom_reply_edit {
             </td>
             </tr> 
 
+            
+            <tr valign="top" class="set-api"<?php if($custom_reply->msgtype!='api') echo ' style="display:none;"';?>><th scope="row"><span class="set-api">第三方接口参数</span></th>
+            <td id="wxlog_music_list">
+                <table class="form-table wxlog_music_list" style="padding-top:15px;">
+                    <tr id="api_token_tr" valign="top"<?php if($custom_reply->image_url=='1') echo ' style="display:none;"';?>>
+                    <th style="width:180px; padding:2px;" scope="row" id='api_token_desc'><?php if($custom_reply->image_url=='0'){echo '第三方接口的微信TOKEN';}else{echo 'POST参数';}?></th>
+                    <td style="padding:2px;"><input name="api_token" type="text" id="api_token" value="<?=$custom_reply->title?>" class="regular-text"></td>
+                    </tr>
+                    <tr valign="top">
+                    <th style="width:110px; padding:2px;" scope="row">URL</th>
+                    <td style="padding:2px;"><input name="api_url" type="text" id="api_url" value="<?=$custom_reply->url?>" class="regular-text"></td>
+                    </tr>
+                    <tr valign="top">
+                    <th style="width:110px; padding:2px;" scope="row">接口类型</th>
+                    <td style="padding:2px;">
+                        <select name="api_mode" id="api_mode" onchange="if(this.value==1){jQuery('#api_token_tr').hide();}else{jQuery('#api_token_tr').show();if(this.value==0){jQuery('#api_token_desc').html('第三方接口的微信TOKEN');}else{jQuery('#api_token_desc').html('POST参数');}}">
+                            <option<?php if($custom_reply->image_url=='0') echo ' selected="selected"';?> value="0">微信标准接口（标准xml）</option>
+                            <option<?php if($custom_reply->image_url=='1') echo ' selected="selected"';?> value="1">文本接口（GET）</option>
+                            <option<?php if($custom_reply->image_url=='2') echo ' selected="selected"';?> value="2">文本接口（POST）</option>
+                        </select>
+                        <p class="description">参数填写帮助 <code><a target="_blank" href="http://www.phplog.com/detail/567.html">点我</a></code></p>                    
+                    </td>
+                    </tr>
+                </table>
+            </td>
+            </tr>  
  
-            <tr valign="top"><th scope="row"><span class="set-post">检索条件</span><span class="set-text">回复内容</span><span class="set-news">第一条描述内容</span><span class="set-music">音乐描述内容</span></th><td>
+            <tr valign="top" id="content_tr"><th scope="row"><span class="set-post">检索条件</span><span class="set-text">回复内容</span><span class="set-news">第一条描述内容</span><span class="set-music">音乐描述内容</span></th><td>
             <textarea name="content" id="content" cols="50" rows="3" style="height:280px;" class="regluar-text ltr"><?=stripslashes($custom_reply->content)?></textarea><p class="set-news description">多图文回复的第一条描述内容</p><p class="set-post description"><code>例：cat=3&year=2014&tag=php+mysql&orderby=date&order=ASC</code> <br><code>参考：<a href="http://www.phplog.com/detail/365.html">http://www.phplog.com/detail/365.html</a></code></p>
             </td></tr>
 
@@ -151,11 +183,11 @@ class WXLOG_Custom_reply_edit {
                 if(wxlog_news_len>=10){
                     alert('最多只能增加10个图文！');return false;
                 }
-                if(wxlog_news_len==0){
-					document.getElementById('content').style.display='';
+				if(wxlog_news_len==0){
+					document.getElementById('content_tr').style.display='';
                 }else{
-					document.getElementById('content').style.display='none';
-				}			
+					document.getElementById('content_tr').style.display='none';
+				}		
                 jQuery("#wxlog_news_list").append('<table class="wxlog_news_list" id="wxlog_news_'+(wxlog_news_len+1)+'" style="padding-top:15px;">'+
                     '<tr valign="top" class="set-news">'+
                     '<th style="width:50px; padding:2px;" scope="row">标题</th>'+
@@ -176,12 +208,16 @@ class WXLOG_Custom_reply_edit {
             }
             function del_wxlog_news(id){
                 var wxlog_news=jQuery(".wxlog_news_list");
-                var wxlog_news_len=wxlog_news.length;
-                if(wxlog_news_len==2){
-					document.getElementById('content').style.display='';
+                var wxlog_news_len=wxlog_news.length;	
+
+                if(wxlog_news_len<2){
+					alert('必须要一个图文');return false;
+                }
+                if(wxlog_news_len>2){
+					document.getElementById('content_tr').style.display='none';
                 }else{
-					document.getElementById('content').style.display='none';
-				}			
+					document.getElementById('content_tr').style.display='';
+				}	
                 jQuery("#"+id).remove();
             }
 			var targetfieldl;
@@ -202,26 +238,44 @@ class WXLOG_Custom_reply_edit {
 		  wp_enqueue_script('media-upload');
 		
 		 global $WXLOG; $WXLOG->add_inline_js("jQuery('#msgtype').change(function(){
+			 	document.getElementById('content_tr').style.display='';
 				if ( jQuery(this).val() == 'news' ) {
+					var wxlog_news=jQuery('.wxlog_news_list');
+					var wxlog_news_len=wxlog_news.length;
+					if(wxlog_news_len>1){
+						document.getElementById('content_tr').style.display='none';
+					}
 					jQuery('.set-news').show();
 					jQuery('.set-music').hide();
 					jQuery('.set-text').hide();
 					jQuery('.set-post').hide();
+					jQuery('.set-api').hide();					
 				} else if ( jQuery(this).val() == 'music' ) {
 					jQuery('.set-music').show();
 					jQuery('.set-news').hide();
 					jQuery('.set-text').hide();
 					jQuery('.set-post').hide();
+					jQuery('.set-api').hide();					
 				} else if ( jQuery(this).val() == 'post' ) {
 					jQuery('.set-music').hide();
 					jQuery('.set-news').hide();
 					jQuery('.set-text').hide();
 					jQuery('.set-post').show();
+					jQuery('.set-api').hide();					
+					jQuery('.set-api').hide();					
+				} else if ( jQuery(this).val() == 'api' ) {
+					document.getElementById('content_tr').style.display='none';
+					jQuery('.set-music').hide();
+					jQuery('.set-news').hide();
+					jQuery('.set-text').hide();
+					jQuery('.set-post').hide();
+					jQuery('.set-api').show();					
 				} else {
 					jQuery('.set-news').hide();
 					jQuery('.set-music').hide();
 					jQuery('.set-post').hide();
 					jQuery('.set-text').show();
+					jQuery('.set-api').hide();					
 				}
 			}).change();
 			window.send_to_editor = function(html) {
@@ -229,7 +283,7 @@ class WXLOG_Custom_reply_edit {
 				 //jQuery('#content').val(html);  
 				 imgurl = jQuery('img',html).attr('src');   
 				 jQuery(targetfield).val(imgurl);
-				 tb_remove();   
+				 tb_remove();    
 			}//更新上传输入框的文件内容  
 			");
 	}
