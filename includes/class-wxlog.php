@@ -269,6 +269,36 @@ class WL {
     }
 
 
+
+
+	function wxlog_post($url,$curlPost){
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_NOBODY, true);
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $curlPost);
+		$data = curl_exec($curl);
+
+		$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+		if ($data === FALSE) {
+			return curl_error($ch); 
+			return false;//连接失败
+		}
+
+		if ($http_code !== 200) {
+			return $http_code;//连接失败
+			return false;//连接失败
+		}
+
+		curl_close($curl);
+		return $data;
+	}
+
+
+
 	//自定义回复
 	public function get_custom_reply($postArray,$custom_reply){
 		$resultStr = '';
@@ -296,6 +326,18 @@ class WL {
 			$contentArr['image_url'] =  $custom_reply->image_url;
 			$contentArr['url'] =  $custom_reply->url;
 			$resultStr = $this->reply_music($postArray['FromUserName'], $postArray['ToUserName'], $contentArr);
+		}elseif($custom_reply->msgtype=='api'){
+			if($custom_reply->image_url==1){
+				$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], file_get_contents($custom_reply->url));
+			}elseif($custom_reply->image_url==2){
+				$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], $this->wxlog_post($custom_reply->url,$custom_reply->title));
+			}else{
+				$TOKEN = $custom_reply->title;
+				$signature_timestamp_nonce = wxlog_make_signature($TOKEN);
+				$custom_reply->url .= ((strpos($custom_reply->url, '?') !== false) ? '&' : '?');
+				$xml = wxlog_get_xml($custom_reply->url.'signature='.$signature_timestamp_nonce[0].'&timestamp='.$signature_timestamp_nonce[1].'&nonce='.$signature_timestamp_nonce[2].'',$wpdb->postStr);
+				exit($xml);
+			}
 		}elseif($custom_reply->msgtype=='post'){
 			$contentArr = $this->get_posts($custom_reply->keyword,$custom_reply->content);
 			if($contentArr){
@@ -322,8 +364,43 @@ class WL {
 	} 
 
 
-	//查询数据库
 	public function get_posts($keyword,$query_array=''){
+		if(empty($keyword)){
+			return;
+		}
+		global $wpdb;
+		if(empty($keyword)){
+			return;
+		}
+		$post_max = ( $wxlog_post_max = get_option( 'wxlog_post_max' ) ) ? $wxlog_post_max : '5';
+		 $where = " 1=1 AND (((post_title LIKE '%".$keyword."%') OR (post_content LIKE '%".$keyword."%'))) AND post_type IN ('post', 'page', 'attachment') AND (post_status = 'publish' OR post_author = 1 AND post_status = 'private') ";
+		$post_array = $wpdb->get_results( "SELECT * FROM wp_posts  WHERE ".$where." ORDER BY post_title LIKE '%".$keyword."%' DESC, post_date DESC Limit ".$post_max );
+		//echo '<pre>';print_r($post_array);
+		$post_total = $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE ".$where.";" );
+		//echo '<pre>';print_r($post_total);
+		foreach($post_array as $key=>$post){
+			if($contentArr){
+				$contentArr[$key]['image_url'] = get_post_wxlog_thumb($post, array(80,80));
+			}else{
+				$contentArr[$key]['image_url'] = get_post_wxlog_thumb($post, array(640,320));
+			}
+			$contentArr[$key]['title'] = $post->post_title;
+			$contentArr[$key]['description'] = get_post_wxlog_excerpts($post,150);
+			$contentArr[$key]['url'] = $post->guid;			
+		}
+		if($post_total>$post_max){
+			$contentArr[$post_max-1]['image_url'] = $contentArr[$post_max-2]['image_url'];
+			$contentArr[$post_max-1]['title'] = '查看更多...';
+			$contentArr[$post_max-1]['description'] = 'more...';
+			$contentArr[$post_max-1]['url'] = 'http://'.$_SERVER['HTTP_HOST'].'/?s='.$keyword;	
+		}
+		//print_r($_SERVER);
+		return $contentArr;
+	}
+
+
+	//查询数据库
+	public function get_posts_old($keyword,$query_array=''){
 		if(empty($keyword)){
 			return;
 		}
