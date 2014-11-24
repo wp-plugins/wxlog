@@ -301,6 +301,7 @@ class WL {
 
 	//自定义回复
 	public function get_custom_reply($postArray,$custom_reply){
+		global $wpdb;
 		$resultStr = '';
 		if($custom_reply->msgtype=='text'){
 			$resultStr = $this->reply_text($postArray['FromUserName'], $postArray['ToUserName'], stripslashes($custom_reply->content));
