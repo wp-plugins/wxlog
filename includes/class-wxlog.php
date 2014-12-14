@@ -374,8 +374,19 @@ class WL {
 			return;
 		}
 		$post_max = ( $wxlog_post_max = get_option( 'wxlog_post_max' ) ) ? $wxlog_post_max : '5';
-		 $where = " 1=1 AND (((post_title LIKE '%".$keyword."%') OR (post_content LIKE '%".$keyword."%'))) AND post_type IN ('post', 'page', 'attachment') AND (post_status = 'publish' OR post_author = 1 AND post_status = 'private') ";
-		$post_array = $wpdb->get_results( "SELECT * FROM wp_posts  WHERE ".$where." ORDER BY post_title LIKE '%".$keyword."%' DESC, post_date DESC Limit ".$post_max );
+		$where = " 1=1 AND (((post_title LIKE '%".$keyword."%') OR (post_content LIKE '%".$keyword."%'))) AND post_type IN ('post', 'page', 'attachment') AND (post_status = 'publish' OR post_author = 1 AND post_status = 'private') ";
+		$order = "post_title LIKE '%".$keyword."%' DESC, post_date DESC";
+		
+		if($keyword==get_option( 'wxlog_post_new' )){
+		 	$where = " 1=1 AND post_type IN ('post', 'page', 'attachment') AND (post_status = 'publish' OR post_author = 1 AND post_status = 'private') ";
+		 	$order = "post_date DESC";
+		}		
+		
+		if($keyword==get_option( 'wxlog_post_hot' ) or $keyword==get_option( 'wxlog_post_hot_comment' ) or in_array($keyword,explode(',',str_replace('，',',',get_option( 'wxlog_post_category' ))))){
+		 	return $this->get_posts_old($keyword);
+		}
+				
+		$post_array = $wpdb->get_results( "SELECT * FROM wp_posts  WHERE ".$where." ORDER BY ".$order." Limit ".$post_max );
 		//echo '<pre>';print_r($post_array);
 		$post_total = $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE ".$where.";" );
 		//echo '<pre>';print_r($post_total);
