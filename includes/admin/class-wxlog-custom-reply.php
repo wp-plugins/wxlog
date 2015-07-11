@@ -2,6 +2,10 @@
  
 class WXLOG_Custom_reply extends WP_List_Table {
 
+	 var $filter_status;
+	 var $logs_per_page;
+	 var $filter_month;
+
 	function __construct(){
 		global $status, $page, $wpdb;
 

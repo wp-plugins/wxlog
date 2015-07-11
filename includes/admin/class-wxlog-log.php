@@ -5,6 +5,10 @@ class WXLOG_Log extends WP_List_Table {
 	 var $all;
 	 var $subscribe;
 	 var $unsubscribe;
+
+	 var $filter_status;
+	 var $logs_per_page;
+	 var $filter_month;
 	 
 	function __construct(){
 		global $status, $page, $wpdb;
@@ -181,7 +185,7 @@ class WXLOG_Log extends WP_List_Table {
 					?>
 					<select name="logs_per_page">
 						<option value="25">每页25行</option>
-						<option value="50" <?php selected( $this->logs_per_page, 50 ) ?>>每页25行</option>
+						<option value="50" <?php selected( $this->logs_per_page, 50 ) ?>>每页50行</option>
 						<option value="100" <?php selected( $this->logs_per_page, 100 ) ?>>每页100行</option>
 						<option value="200" <?php selected( $this->logs_per_page, 200 ) ?>>每页200行</option>
 						<option value="-1" <?php selected( $this->logs_per_page, -1 ) ?>>显示全部</option>
